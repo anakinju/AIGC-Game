@@ -21,12 +21,6 @@
 
 ## 🖼️ 游戏界面展示 (Unity Frontend Screenshots)
 
-### 🎥 项目演示视频 (Demo Video)
-<p align="center">
-  <video src="assets/demo_video.mp4" width="800" controls>
-    您的浏览器不支持 video 标签。
-  </video>
-</p>
 
 ### 🗺️ 场景地图与探索
 <p align="center">
