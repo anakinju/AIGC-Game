@@ -11,6 +11,14 @@
 - **灵活的运行模式**：支持玩家参与模式（Player Involved）和 NPC 纯对话模式（NPC Only）。
 - **可观测性**：集成 LangSmith，提供完整的对话链路追踪和 Prompt 调试能力。
 
+## 📊 系统工作流 (Workflow)
+
+<p align="center">
+  <img src="assets/workflow.png" alt="NPC Interaction & Emotion Flow" width="800">
+</p>
+
+该工作流展示了从玩家输入到 NPC 认知层处理，再到 WorldState 结算和记忆构建的完整闭环。
+
 ## 🚀 快速开始
 
 ### 1. 环境准备
