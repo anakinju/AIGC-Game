@@ -19,6 +19,28 @@
 
 该工作流展示了从玩家输入到 NPC 认知层处理，再到 WorldState 结算和记忆构建的完整闭环。
 
+## 🖼️ 游戏界面展示 (Unity Frontend Screenshots)
+
+### 🗺️ 场景地图与探索
+<p align="center">
+  <img src="assets/ui_map.png" alt="Game Map" width="800">
+</p>
+
+### 💬 NPC 对话交互
+<p align="center">
+  <img src="assets/ui_chat.png" alt="NPC Chat Interface" width="800">
+</p>
+
+### 📱 任务调度系统
+<p align="center">
+  <img src="assets/ui_dispatch.png" alt="Dispatch System" width="800">
+</p>
+
+### 🎮 Unity 集成演示
+<p align="center">
+  <img src="assets/ui_unity.png" alt="Unity Integration" width="800">
+</p>
+
 ## 🚀 快速开始
 
 ### 1. 环境准备
