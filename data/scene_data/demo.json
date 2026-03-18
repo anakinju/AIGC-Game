@@ -1,0 +1,737 @@
+[
+    {
+      "name": "01_00_00",
+      "scene_id": "01_00_00",
+      "location": "The Bureau",
+      "time": "Morning",
+      "max_turns": 8,
+      "trigger_conditions": {
+        "time_condition": "1;1",
+        "additional_conditions": "Player has just arrived at the Bureau"
+      },
+      "environment": "Fluorescent lights hum above a corridor that always feels a little too clean. Glass doors reflect your face back at you—calm on the surface, tense underneath. The air smells of copier toner and cold metal. Somewhere beyond the staff-only doors, a ventilation fan stutters, and for a moment the building feels less like an office and more like a machine swallowing secrets.",
+      "interactive_environment_objects": [
+        {
+          "name": "Confidential Document",
+          "type": "item",
+          "description": "A sealed confidential document assigned to the player for delivery."
+        }
+      ],
+      "current_topic": "Receive a confidential document and the delivery mission",
+      "key_npcs": ["Player", "Haruko", "Chou Hu"],
+      "npc_relationships": [
+        {
+          "character1": "Haruko",
+          "character2": "Player",
+          "category": "Wary",
+          "emotion_modifier": "tense",
+          "intensity": 0.4,
+          "recent_interaction": "First formal meeting; Haruko assigns the player a task."
+        },
+        {
+          "character1": "Chou Hu",
+          "character2": "Player",
+          "category": "Neutral",
+          "emotion_modifier": "neutral",
+          "intensity": 0.4,
+          "recent_interaction": "First meeting; Chou Hu evaluates the player while receiving the delivery."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Haruko",
+          "action_point_cost": 1,
+          "goal": "Assign the player to deliver the confidential document to Chou Hu. The player must figure out where Chou Hu is on their own.",
+          "npc_background": {
+            "knowledge": [
+              "Haruko is the player's boss",
+              "The document must be delivered",
+              "Chou Hu is the recipient"
+            ]
+          }
+        },
+        {
+          "name": "Chou Hu",
+          "action_point_cost": 1,
+          "goal": "Receive the confidential document and test the player's attitude and reliability.",
+          "npc_background": {
+            "knowledge": [
+              "He is expecting a Bureau delivery",
+              "The confidential document is meant for him"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "The player receives the confidential document and leaves to start the mission",
+        "end_condition2": "The player refuses or repeatedly derails the conversation",
+        "goal_achievement": "Player receives the confidential document and starts Task 0"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D1_DOC_RECEIVED",
+          "expected_text": "The player accepted the confidential document.",
+          "deadline_turn": 10
+        }
+      ]
+    },
+  
+    {
+      "name": "01 01 00",
+      "location": "Main Street",
+      "time": "Morning",
+      "max_turns": 12,
+      "trigger_conditions": {
+        "time_condition": "1;1",
+        "additional_conditions": "Player needs to find Chou Hu's location"
+      },
+      "environment": "The main street looks ordinary at first—shop signs, crosswalk lines, delivery scooters weaving through traffic. But the longer you stand still, the more the details feel slightly off: a storefront that never opens, a shadow that doesn’t match the sun, a faint incense note slipping between car exhaust and fried food. People pass you with practiced indifference, as if everyone has agreed not to notice what’s hiding in plain sight.",
+      "interactive_environment_objects": null,
+      "current_topic": "Ask around to locate Chou Hu",
+      "key_npcs": ["Player", "Street Locals"],
+      "npc_relationships": [
+        {
+          "character1": "Street Locals",
+          "character2": "Player",
+          "category": "Wary",
+          "emotion_modifier": "neutral",
+          "intensity": 0.4,
+          "recent_interaction": "Locals hesitate but may share gossip if approached carefully."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Street Locals",
+          "action_point_cost": 1,
+          "goal": "Respond cautiously; if the player asks properly, reveal that Chou Hu can be found at the Teahouse.",
+          "npc_background": {
+            "knowledge": [
+              "Chou Hu is a local figure",
+              "People avoid talking about him directly",
+              "Teahouse is where he is usually seen"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "The player learns the Teahouse location and unlocks it on the map",
+        "end_condition2": "The player shows bad attitude and gets nothing",
+        "goal_achievement": "Teahouse location is revealed and unlocked"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D1_TEAHOUSE_UNLOCKED",
+          "expected_text": "The player obtained Chou Hu's location (Teahouse) and unlocked it on the map.",
+          "deadline_turn": 20
+        }
+      ]
+    },
+  
+    {
+      "name": "01 02 00",
+      "location": "Teahouse",
+      "time": "Morning",
+      "max_turns": 15,
+      "trigger_conditions": {
+        "time_condition": "1;1",
+        "additional_conditions": "Teahouse is unlocked and the player still has the confidential document"
+      },
+      "environment": "The teahouse is warm and dim, wrapped in steam and low conversation. Porcelain cups clink softly, and the smell of roasted leaves settles into your clothes. People here don’t stare—but they watch, the way locals watch a stranger who asks the wrong question. In the back, a half-drawn curtain suggests a room where private talks happen without raising voices.",
+      "interactive_environment_objects": null,
+      "current_topic": "Deliver the confidential document to Chou Hu",
+      "key_npcs": ["Player", "Chou Hu"],
+      "npc_relationships": [
+        {
+          "character1": "Chou Hu",
+          "character2": "Player",
+          "category": "Neutral",
+          "emotion_modifier": "mysterious",
+          "intensity": 0.5,
+          "recent_interaction": "First meeting; Chou Hu evaluates the player while receiving the delivery."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Chou Hu",
+          "action_point_cost": 1,
+          "goal": "Receive the confidential document and test the player's attitude and reliability.",
+          "npc_background": {
+            "knowledge": [
+              "He is expecting a Bureau delivery",
+              "The confidential document is meant for him"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "The player hands over the confidential document and completes the delivery",
+        "end_condition2": "The player refuses to hand it over and leaves",
+        "goal_achievement": "Task 0 completed: Chou Hu obtains the confidential document"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D1_DOC_DELIVERED",
+          "expected_text": "Chou Hu obtained the confidential document and the player completed Task 0.",
+          "deadline_turn": 15
+        }
+      ]
+    },
+  
+    {
+      "name": "01 03 00",
+      "location": "The Bureau",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "1;1",
+        "additional_conditions": "After delivering the confidential document, the player returns to the Bureau"
+      },
+      "environment": "Back under the fluorescent lights, the Bureau feels colder than before. Paperwork moves quietly from hand to hand. The place runs on routine, and routine has a way of making even strange errands look normal on record.",
+      "interactive_environment_objects": null,
+      "current_topic": "Report mission completion",
+      "key_npcs": ["Player", "Haruko"],
+      "npc_relationships": [
+        {
+          "character1": "Haruko",
+          "character2": "Player",
+          "category": "Neutral",
+          "emotion_modifier": "neutral",
+          "intensity": 0.45,
+          "recent_interaction": "Player returns to report completion of Haruko's assignment."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Haruko",
+          "action_point_cost": 1,
+          "goal": "Confirm the document has been delivered and close out the task formally.",
+          "npc_background": {
+            "knowledge": [
+              "The player was assigned a delivery task",
+              "Chou Hu should have received the document by now"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "The player completes the report and closes Day 1",
+        "end_condition2": "The player refuses to report",
+        "goal_achievement": "Delivery report is completed; Haruko's favor increases"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D1_DELIVERY_REPORTED",
+          "expected_text": "The player reported the delivery completion to Haruko.",
+          "deadline_turn": 12
+        },
+        {
+          "state_key": "WS_D1_HARUKO_FAVOR_UP",
+          "expected_text": "Haruko's favor increased after the player followed procedure.",
+          "deadline_turn": 12
+        }
+      ]
+    },
+  
+    {
+      "name": "02 00 00",
+      "location": "-",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "Day 2 begins and Task 1 is activated"
+      },
+      "environment": "A new case begins. The city feels the same, but your work doesn’t. More locations become relevant, and the sense of time pressure becomes harder to ignore.",
+      "interactive_environment_objects": null,
+      "current_topic": "Unlock investigation locations and begin searching for information",
+      "key_npcs": ["Player"],
+      "npc_relationships": [],
+      "interactive_npc": [],
+      "scene_end_state_reference": {
+        "end_condition1": "Player chooses where to investigate first",
+        "end_condition2": "None",
+        "goal_achievement": "Locations unlocked: Hospital, Teahouse, Main Street, Medicine Shop"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_LOCATIONS_UNLOCKED",
+          "expected_text": "Player unlocked Hospital, Teahouse, Main Street, Medicine Shop.",
+          "deadline_turn": 5
+        }
+      ]
+    },
+  
+    {
+      "name": "02 01 00",
+      "location": "Hospital",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "Player goes to the hospital to investigate missing body records"
+      },
+      "environment": "The hospital is bright in the wrong way—white walls, white floors, white noise. Disinfectant bites at the back of your throat. Nurses move fast, eyes trained on screens instead of faces. Somewhere down the hall, an elevator dings, and you can’t shake the sense that some names are missing from the records—and no one wants to say why.",
+      "interactive_environment_objects": [
+        {
+          "name": "Missing Body Ledger",
+          "type": "item",
+          "description": "A list of missing bodies and mismatched records."
+        }
+      ],
+      "current_topic": "Obtain the missing body ledger",
+      "key_npcs": ["Player", "Hospital Staff"],
+      "npc_relationships": [
+        {
+          "character1": "Hospital Staff",
+          "character2": "Player",
+          "category": "Wary",
+          "emotion_modifier": "tense",
+          "intensity": 0.4,
+          "recent_interaction": "Staff hesitates when asked about missing records."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Hospital Staff",
+          "action_point_cost": 1,
+          "goal": "Avoid trouble; provide limited access unless the player handles the conversation carefully.",
+          "npc_background": {
+            "knowledge": [
+              "Some records are inconsistent",
+              "People have been asking questions lately"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "The player obtains the Missing Body Ledger",
+        "end_condition2": "The player fails to get the ledger today",
+        "goal_achievement": "Player obtains the missing body ledger (Task 1 Step 1)"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_LEDGER_OBTAINED",
+          "expected_text": "The player obtained the Missing Body Ledger.",
+          "deadline_turn": 18
+        }
+      ]
+    },
+  
+    {
+      "name": "02 01 01-1",
+      "location": "Main Street",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "Player has the Missing Body Ledger and investigates leads on Main Street"
+      },
+      "environment": "The street stays busy, but the air feels watchful. People talk in half-sentences, and the moment you mention names, their expressions tighten and slide away.",
+      "interactive_environment_objects": null,
+      "current_topic": "Track leads from the missing body ledger (Main Street branch)",
+      "key_npcs": ["Player", "Street Locals"],
+      "npc_relationships": [
+        {
+          "character1": "Street Locals",
+          "character2": "Player",
+          "category": "Wary",
+          "emotion_modifier": "neutral",
+          "intensity": 0.35,
+          "recent_interaction": "The player asks about ledger-related names and dates."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Street Locals",
+          "action_point_cost": 1,
+          "goal": "Share vague rumors if the player is careful; otherwise shut down the conversation.",
+          "npc_background": {
+            "knowledge": [
+              "There are strange rumors recently",
+              "Some familiar faces look 'wrong'"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "Player gets enough hints to continue this branch",
+        "end_condition2": "Player gets nothing useful",
+        "goal_achievement": "Branch progress: Main Street investigation advanced"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_BRANCH_MAINST_ADVANCED",
+          "expected_text": "Player advanced the Main Street branch based on the missing body ledger.",
+          "deadline_turn": 20
+        }
+      ]
+    },
+  
+    {
+      "name": "02 01 01-2",
+      "location": "Teahouse",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "Player has the Missing Body Ledger and investigates leads at the Teahouse"
+      },
+      "environment": "Steam curls over cups and faces. A laugh rises from one table and dies fast when you step closer. The teahouse is social on the surface, but information here is traded carefully—like tea that burns if you sip too quickly.",
+      "interactive_environment_objects": null,
+      "current_topic": "Track leads from the missing body ledger (Teahouse branch)",
+      "key_npcs": ["Player", "Teahouse Regulars"],
+      "npc_relationships": [
+        {
+          "character1": "Teahouse Regulars",
+          "character2": "Player",
+          "category": "Wary",
+          "emotion_modifier": "mysterious",
+          "intensity": 0.35,
+          "recent_interaction": "The player asks about ledger-related names inside the teahouse."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Teahouse Regulars",
+          "action_point_cost": 1,
+          "goal": "Hint at strange sightings if the player builds trust; otherwise keep silent.",
+          "npc_background": {
+            "knowledge": [
+              "Rumors circulate here quickly",
+              "Some people seen here don't seem fully themselves"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "Player gets enough hints to continue this branch",
+        "end_condition2": "Player gets nothing useful",
+        "goal_achievement": "Branch progress: Teahouse investigation advanced"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_BRANCH_TEA_ADVANCED",
+          "expected_text": "Player advanced the Teahouse branch based on the missing body ledger.",
+          "deadline_turn": 20
+        }
+      ]
+    },
+  
+    {
+      "name": "02 01 01-3",
+      "location": "Ancient Medicine Shop",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "Player has the Missing Body Ledger and investigates leads at the medicine shop"
+      },
+      "environment": "The shop is quiet, amber-lit, and heavy with the scent of dried herbs. It feels like a place where time slows down—until you remember why you came, and the stillness becomes pressure.",
+      "interactive_environment_objects": null,
+      "current_topic": "Track leads from the missing body ledger (Medicine Shop branch)",
+      "key_npcs": ["Player", "Huang Qiye"],
+      "npc_relationships": [
+        {
+          "character1": "Huang Qiye",
+          "character2": "Player",
+          "category": "Wary",
+          "emotion_modifier": "mysterious",
+          "intensity": 0.35,
+          "recent_interaction": "First serious exchange; Huang listens more than he speaks."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Huang Qiye",
+          "action_point_cost": 1,
+          "goal": "Respond carefully; provide limited guidance without exposing too much.",
+          "npc_background": {
+            "knowledge": [
+              "He has heard rumors about unusual cases",
+              "He is cautious around the Bureau"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "Player gets enough hints to continue this branch",
+        "end_condition2": "Player gets nothing useful",
+        "goal_achievement": "Branch progress: Medicine Shop investigation advanced"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_BRANCH_SHOP_ADVANCED",
+          "expected_text": "Player advanced the medicine shop branch based on the missing body ledger.",
+          "deadline_turn": 20
+        }
+      ]
+    },
+  
+    {
+      "name": "02 02 01-1",
+      "location": "Main Street",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "Player follows the Main Street branch and confirms revival signs"
+      },
+      "environment": "Between the rush of footsteps and traffic, you notice someone moving wrong—alive, breathing, but empty in the eyes. They pause as if listening to instructions only they can hear.",
+      "interactive_environment_objects": null,
+      "current_topic": "Confirm revival signs (Main Street)",
+      "key_npcs": ["Player", "Revived Individual"],
+      "npc_relationships": [
+        {
+          "character1": "Revived Individual",
+          "character2": "Player",
+          "category": "Neutral",
+          "emotion_modifier": "scary",
+          "intensity": 0.5,
+          "recent_interaction": "The player approaches and tries to confirm their identity."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Revived Individual",
+          "action_point_cost": 1,
+          "goal": "Respond slowly and vaguely; reveal dulled cognition and odd memory gaps.",
+          "npc_background": {
+            "knowledge": [
+              "They cannot clearly explain what happened",
+              "Their memory feels incomplete"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "Player confirms revival signs on Main Street",
+        "end_condition2": "Player fails to confirm anything solid",
+        "goal_achievement": "Main Street revival truth confirmed"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_REVIVAL_MAINST_CONFIRMED",
+          "expected_text": "Player learned the truth: revival signs exist on Main Street.",
+          "deadline_turn": 18
+        }
+      ]
+    },
+  
+    {
+      "name": "02 02 01-2",
+      "location": "Teahouse",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "Player follows the Teahouse branch and confirms revival signs"
+      },
+      "environment": "A patron sits too still, fingers wrapped around a warm cup as if using it to remember what warmth is. When you speak, their response arrives a beat late—soft, blank, almost rehearsed.",
+      "interactive_environment_objects": null,
+      "current_topic": "Confirm revival signs (Teahouse)",
+      "key_npcs": ["Player", "Revived Individual"],
+      "npc_relationships": [
+        {
+          "character1": "Revived Individual",
+          "character2": "Player",
+          "category": "Neutral",
+          "emotion_modifier": "scary",
+          "intensity": 0.5,
+          "recent_interaction": "The player tries to verify the person matches the missing ledger."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Revived Individual",
+          "action_point_cost": 1,
+          "goal": "Show subtle memory loss and strange calm; fail to recall key personal details.",
+          "npc_background": {
+            "knowledge": [
+              "They forget recent moments easily",
+              "They cannot explain why their record says they are dead"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "Player confirms revival signs in the Teahouse",
+        "end_condition2": "Player only gets rumors",
+        "goal_achievement": "Teahouse revival truth confirmed"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_REVIVAL_TEA_CONFIRMED",
+          "expected_text": "Player learned the truth: revival signs exist in the Teahouse.",
+          "deadline_turn": 18
+        }
+      ]
+    },
+  
+    {
+      "name": "02 02 01-3",
+      "location": "Ancient Medicine Shop",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "Player follows the medicine shop branch and confirms revival signs"
+      },
+      "environment": "In the amber light, the quiet feels heavier. Someone sits in the shop with an unsettling stillness, and the air turns cold in a way that doesn’t match the weather outside.",
+      "interactive_environment_objects": null,
+      "current_topic": "Confirm revival signs (Medicine Shop)",
+      "key_npcs": ["Player", "Huang Qiye", "Revived Individual"],
+      "npc_relationships": [
+        {
+          "character1": "Huang Qiye",
+          "character2": "Player",
+          "category": "Wary",
+          "emotion_modifier": "tense",
+          "intensity": 0.4,
+          "recent_interaction": "Huang reacts carefully as the player notices something abnormal."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Huang Qiye",
+          "action_point_cost": 1,
+          "goal": "Stay guarded; acknowledge something is wrong without revealing too much.",
+          "npc_background": {
+            "knowledge": [
+              "He recognizes the signs of something unnatural",
+              "He does not want trouble brought to his shop"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "Player confirms revival signs near the medicine shop",
+        "end_condition2": "Player leaves without a solid conclusion",
+        "goal_achievement": "Medicine shop revival truth confirmed"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_REVIVAL_SHOP_CONFIRMED",
+          "expected_text": "Player learned the truth: revival signs exist near the medicine shop.",
+          "deadline_turn": 18
+        }
+      ]
+    },
+  
+    {
+      "name": "02 02 01",
+      "location": "-",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "At least 2 of WS_D2_REVIVAL_MAINST_CONFIRMED / WS_D2_REVIVAL_TEA_CONFIRMED / WS_D2_REVIVAL_SHOP_CONFIRMED are true"
+      },
+      "environment": "Different places, same wrong feeling. The pattern is no longer a rumor—something is bringing the dead back, and the city is pretending it’s normal.",
+      "interactive_environment_objects": null,
+      "current_topic": "Synthesize findings: revival is happening",
+      "key_npcs": ["Player"],
+      "npc_relationships": [],
+      "interactive_npc": [],
+      "scene_end_state_reference": {
+        "end_condition1": "Milestone reached",
+        "end_condition2": "None",
+        "goal_achievement": "Player confirms the core truth: revival signs are real"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_REVIVAL_TRUTH_CONFIRMED",
+          "expected_text": "Player confirmed the truth: bodies are being revived.",
+          "deadline_turn": 5
+        }
+      ]
+    },
+  
+    {
+      "name": "02 03 01-1",
+      "location": "The Bureau",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "WS_D2_REVIVAL_TRUTH_CONFIRMED is true"
+      },
+      "environment": "The Bureau’s routine doesn’t change, even when the content does. Under the lights, you try to turn something impossible into something reportable.",
+      "interactive_environment_objects": null,
+      "current_topic": "Settlement (success): report revival findings",
+      "key_npcs": ["Player", "Haruko"],
+      "npc_relationships": [
+        {
+          "character1": "Haruko",
+          "character2": "Player",
+          "category": "Wary",
+          "emotion_modifier": "tense",
+          "intensity": 0.4,
+          "recent_interaction": "Haruko receives the player's findings and measures their usefulness."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Haruko",
+          "action_point_cost": 1,
+          "goal": "Acknowledge the finding and push the player to continue fast; keep control over the situation.",
+          "npc_background": {
+            "knowledge": [
+              "The player has confirmed something abnormal",
+              "Time is limited"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "Settlement completes",
+        "end_condition2": "None",
+        "goal_achievement": "Success settlement completed (revival report generated as worldstate)"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_REVIVAL_REPORT_GENERATED",
+          "expected_text": "A revival report was generated after confirming the revival truth.",
+          "deadline_turn": 10
+        }
+      ]
+    },
+  
+    {
+      "name": "02 03 01-2",
+      "location": "The Bureau",
+      "time": "Morning",
+      "trigger_conditions": {
+        "time_condition": "2;1",
+        "additional_conditions": "WS_D2_REVIVAL_TRUTH_CONFIRMED is false"
+      },
+      "environment": "You return with fragments instead of conclusions. The Bureau still wants answers. Under the fluorescent lights, silence reads like failure.",
+      "interactive_environment_objects": null,
+      "current_topic": "Settlement (failure): insufficient findings",
+      "key_npcs": ["Player", "Haruko"],
+      "npc_relationships": [
+        {
+          "character1": "Haruko",
+          "character2": "Player",
+          "category": "Wary",
+          "emotion_modifier": "angry",
+          "intensity": 0.45,
+          "recent_interaction": "Haruko is dissatisfied with the lack of progress."
+        }
+      ],
+      "interactive_npc": [
+        {
+          "name": "Haruko",
+          "action_point_cost": 1,
+          "goal": "Pressure the player and signal displeasure; demand progress.",
+          "npc_background": {
+            "knowledge": [
+              "The player did not confirm revival truth today",
+              "Time pressure is increasing"
+            ]
+          }
+        }
+      ],
+      "scene_end_state_reference": {
+        "end_condition1": "Settlement completes",
+        "end_condition2": "None",
+        "goal_achievement": "Failure settlement completed; Haruko's favor decreases"
+      },
+      "worldstate_tasks": [
+        {
+          "state_key": "WS_D2_HARUKO_FAVOR_DOWN",
+          "expected_text": "Haruko's favor decreased due to insufficient findings.",
+          "deadline_turn": 10
+        }
+      ]
+    }
+  ]
+  

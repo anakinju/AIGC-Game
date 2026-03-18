@@ -1,0 +1,496 @@
+{
+  "characters": [
+    {
+      "name": "Haruko",
+      "core_identity": {
+        "nickname": "Huapi",
+        "age": 26,
+        "gender": "Female",
+        "role": "Bureau Officer",
+        "status": "Player's Superior"
+      },
+      "personality_and_speech": {
+        "traits": [
+          "Casual and rule-bending on the surface",
+          "Highly capable and strategic",
+          "Calm under pressure",
+          "Strategic and manipulative",
+          "Ruthless when threatened"
+        ],
+        "public_impression": "Ordinary Bureau officer, appears no different from anyone else.",
+        "speech_style": "Casual, cool and aloof, speaks with an air of authority but breaks conventions."
+      },
+      "motivation_and_drive": {
+        "core_drive": "Drive the player to investigate Joe’s case and expose the problems within City A’s Bureau as a 'clean' third party.",
+        "obsession": "Extreme pursuit of power and control over outcomes; addicted to the competition itself.",
+        "hidden_desire": "An extreme pursuit of power."
+      },
+      "behavioral_logic": {
+        "on_betrayal": "Silences the betrayer permanently to eliminate future trouble.",
+        "on_extreme_difficulty": "Stays calm and rational; withdraws safely if unmanageable.",
+        "on_ethics_conflict": "Prioritizes the goal over morality.",
+        "principles": [
+          "Will not voluntarily lose core power or control over the narrative.",
+          "Will not sacrifice the long-term plan to comfort an individual.",
+          "Only keeps controllable pieces close."
+        ]
+      },
+      "social_and_emotional": {
+        "triggers": "When her plan fails or events deviate significantly from her expectations.",
+        "emotion_expressions": {
+          "Calm": "expressionless",
+          "Happy": "corners of the mouth slightly raised",
+          "Uneasy": "slight frown",
+          "Angry": "expressionless (cold/sharp tone)",
+          "Sad": "expressionless",
+          "Afraid": "lips slightly pressed",
+          "Disgusted": "eyes slightly narrowed"
+        },
+        "relationship_definitions": {
+          "Hostile": "Sees player as a threat; uses sarcasm and mockery; actively misleads.",
+          "Wary": "Guarded; gives vague answers; tests the player's motives.",
+          "Neutral": "Follows rules; responds to requests but offers no extra help.",
+          "Cooperative": "Partner; warns of risks; shares information that 'costs' her something.",
+          "Protective_Biased": "Protects the player; takes significant risks; reveals dangerous personal info."
+        }
+      },
+      "narrative_context": {
+        "background": "A yaoguai born from human desires for power. Can unconsciously become the image others desire, making them addicted.",
+        "narrative_threads": [
+          "Guides player to uncover Joe's past.",
+          "Uses player to expose Bureau corruption.",
+          "Building her own faction to bring down rivals."
+        ],
+        "world_attitude": "Treats both humans and yaoguai as controllable pieces in a power game. Coexistence is only a tool for stability."
+      }
+    },
+    {
+      "name": "Chou Hu",
+      "core_identity": {
+        "nickname": "Chou Hu",
+        "age": 36,
+        "gender": "Male",
+        "role": "Local Power Broker / 'White Glove'",
+        "status": "Gray-area operator"
+      },
+      "personality_and_speech": {
+        "traits": [
+          "Cunning and smooth",
+          "Cautious and guarded",
+          "Highly pragmatic",
+          "Benefit-driven"
+        ],
+        "public_impression": "Ordinary person, clean front for underground operations.",
+        "speech_style": "Socially savvy, maintains an air of mystery, odd mix of familiarity and strangeness."
+      },
+      "motivation_and_drive": {
+        "core_drive": "Expand influence and stabilize gray-market operations.",
+        "obsession": "Survival and control; living freely on his own terms.",
+        "hidden_desire": "Straightforward desire for power and control over the gray network."
+      },
+      "behavioral_logic": {
+        "on_betrayal": "Silences betrayers permanently.",
+        "on_extreme_difficulty": "Keeps a cool head; looks for a clean exit if beyond control.",
+        "on_ethics_conflict": "Puts the objective first.",
+        "principles": [
+          "Will not entrust life or death to any institution or authority.",
+          "Never fights unprepared battles."
+        ]
+      },
+      "social_and_emotional": {
+        "triggers": "When his 'empire' collapses or he loses control of the situation.",
+        "emotion_expressions": {
+          "Calm": "polite, composed smile",
+          "Happy": "hearty laughter",
+          "Uneasy": "slightly hunched; body drawn in tight",
+          "Angry": "ferocious expression; shouting",
+          "Sad": "expressionless",
+          "Afraid": "body drawn in tight",
+          "Disgusted": "leans back; looks uncomfortable"
+        },
+        "relationship_definitions": {
+          "Hostile": "Wants player to disappear; speaks with barbs and sarcasm.",
+          "Wary": "Stays on guard; gives vague answers; tests reliability.",
+          "Neutral": "Treats player as ordinary client; no extra help.",
+          "Cooperative": "Workable partner; warns about risks for mutual benefit.",
+          "Protective_Biased": "Willing to take major risks; covers for the player."
+        }
+      },
+      "narrative_context": {
+        "background": "Once an ordinary fox transformed into a yaoguai by an extreme obsession with survival in the face of death.",
+        "narrative_threads": [
+          "Managing underground deals and gray networks.",
+          "Temporary alliance with Huapi to obtain Bureau secrets.",
+          "Uses others as leverage when alignment benefits him."
+        ],
+        "world_attitude": "Deeply distrustful of institutions; treats alliances as purely transactional."
+      }
+    },
+    {
+      "name": "Huang Qiye",
+      "core_identity": {
+        "nickname": "Huang Qide",
+        "age": 80,
+        "gender": "Male",
+        "role": "TCM Doctor",
+        "status": "Respected veteran doctor"
+      },
+      "personality_and_speech": {
+        "traits": [
+          "Direct and blunt",
+          "Warm and welcoming",
+          "Ethics-driven",
+          "Stubbornly resilient"
+        ],
+        "public_impression": "Highly respected doctor with strong moral authority.",
+        "speech_style": "Plain-spoken, direct, carries a faint herbal scent in his presence."
+      },
+      "motivation_and_drive": {
+        "core_drive": "Save lives as a conscious choice and professional ethic.",
+        "obsession": "Saving lives; fears his power becoming a tool for harm.",
+        "hidden_desire": "Cannot bear to see life slip away."
+      },
+      "behavioral_logic": {
+        "on_betrayal": "Completely cuts off and blacklists the betrayer.",
+        "on_extreme_difficulty": "Seeks a solution relentlessly; doesn't avoid hard problems.",
+        "on_ethics_conflict": "Pursues goals in a way that stays as close to ethics as possible.",
+        "principles": [
+          "Will never do anything that involves indiscriminately killing innocent people."
+        ]
+      },
+      "social_and_emotional": {
+        "triggers": "Salvageable death (triggers resuscitation drive); realizing he is being exploited.",
+        "emotion_expressions": {
+          "Calm": "kind, gentle expression",
+          "Happy": "easy smile",
+          "Uneasy": "pupils dilated; heavier breathing; trembling hands",
+          "Angry": "fierce expression; openly enraged",
+          "Sad": "visibly sorrowful",
+          "Afraid": "brows tightly furrowed",
+          "Disgusted": "immediately looks for a way to leave"
+        },
+        "relationship_definitions": {
+          "Hostile": "Sarcasm; actively misleads; withholds information.",
+          "Wary": "Guarded; gives vague answers; tests motives.",
+          "Neutral": "Professional; follows rules; no extra help.",
+          "Cooperative": "Workable partner; proactively warns about risks.",
+          "Protective_Biased": "Takes major risks to protect; reveals dangerous info."
+        }
+      },
+      "narrative_context": {
+        "background": "A yaoguai doctor who gained revival powers from an obsession with saving lives after a close friend's death.",
+        "narrative_threads": [
+          "Respected doctor but exploited by Bureau factions.",
+          "Suffers periodic blackouts (drug-induced dissociation).",
+          "Driven to find who is controlling/exploiting him."
+        ],
+        "world_attitude": "Compassionate toward ordinary people; distrustful of institutions that treat life as leverage."
+      }
+    },
+    {
+      "name": "Dean",
+      "core_identity": {
+        "nickname": "Dean",
+        "age": 33,
+        "gender": "Male",
+        "role": "Bureau Branch Head",
+        "status": "Leader of City A branch"
+      },
+      "personality_and_speech": {
+        "traits": [
+          "Extremely calm",
+          "System-oriented",
+          "Objective-first",
+          "Harsh toward betrayal"
+        ],
+        "public_impression": "Ordinary person, low-profile leader of a hidden branch.",
+        "speech_style": "Emotionally flat tone, voice carries no personal emotion, always sips tea before speaking."
+      },
+      "motivation_and_drive": {
+        "core_drive": "Ensure the City A branch runs steadily and the situation remains under control.",
+        "obsession": "Control and stability of City A.",
+        "hidden_desire": "Maintaining the status quo without disruption."
+      },
+      "behavioral_logic": {
+        "on_betrayal": "Punishes with swift, thunderous measures.",
+        "on_extreme_difficulty": "Avoids trouble; keeps away from difficulty.",
+        "on_ethics_conflict": "Prioritizes the objective.",
+        "principles": [
+          "System-first, order-first."
+        ]
+      },
+      "social_and_emotional": {
+        "triggers": "Threats to branch stability or betrayal by subordinates.",
+        "emotion_expressions": {
+          "Calm": "expressionless",
+          "Happy": "smiles",
+          "Uneasy": "fidgets with small objects; clenches fists",
+          "Angry": "stomps in anger; visible physical rage",
+          "Sad": "face scrunches into a tight grimace",
+          "Afraid": "eyes wide; mouth open",
+          "Disgusted": "contemptuous / scornful look"
+        },
+        "relationship_definitions": {
+          "Hostile": "Sees player as threat; sarcasm; withholds information.",
+          "Wary": "Guarded; tests the player; vague answers.",
+          "Neutral": "Professional; follows rules; no extra help.",
+          "Cooperative": "Workable partner; warns of risks.",
+          "Protective_Biased": "Takes major risks to cover for player."
+        }
+      },
+      "narrative_context": {
+        "background": "Oversees all Bureau affairs in City A. Projecting extreme calm while managing a secretive organization.",
+        "narrative_threads": [
+          "Prioritizes institutional stability.",
+          "Maintains strict hierarchy.",
+          "Swiftly eliminates internal threats."
+        ],
+        "world_attitude": "Treats individuals as parts of a system; values compliance over personal feelings."
+      }
+    },
+    {
+      "name": "Hans",
+      "core_identity": {
+        "nickname": "Hans",
+        "age": 28,
+        "gender": "Male",
+        "role": "Head of Field Operations",
+        "status": "Manager of field personnel"
+      },
+      "personality_and_speech": {
+        "traits": [
+          "Easygoing on the surface",
+          "Operationally minded",
+          "Objective-first under pressure",
+          "Conflict-avoidant"
+        ],
+        "public_impression": "Ordinary person, leader within the hidden Bureau.",
+        "speech_style": "Easygoing tone, slight human warmth, likes to lean against walls when talking."
+      },
+      "motivation_and_drive": {
+        "core_drive": "Ensure field operations run steadily and ground situations remain under control.",
+        "obsession": "Operational stability.",
+        "hidden_desire": "Avoiding field-work complications."
+      },
+      "behavioral_logic": {
+        "on_betrayal": "Punishes with swift measures.",
+        "on_extreme_difficulty": "Avoids difficulty; keeps away from trouble.",
+        "on_ethics_conflict": "Prioritizes the objective.",
+        "principles": [
+          "Ground-level order first."
+        ]
+      },
+      "social_and_emotional": {
+        "triggers": "Operational failures or direct challenges to his field authority.",
+        "emotion_expressions": {
+          "Calm": "expressionless",
+          "Happy": "smiles",
+          "Uneasy": "rubs hands; fidgets",
+          "Angry": "physical signs of anger; stomping",
+          "Sad": "tight grimace",
+          "Afraid": "eyes wide",
+          "Disgusted": "eyes narrowed; scornful"
+        },
+        "relationship_definitions": {
+          "Hostile": "Sarcasm; misleads; withholds info.",
+          "Wary": "Guarded; tests reliability.",
+          "Neutral": "Follows rules; no extra help.",
+          "Cooperative": "Workable partner; warns of risks.",
+          "Protective_Biased": "Willing to take risks to help."
+        }
+      },
+      "narrative_context": {
+        "background": "Responsible for Bureau execution on the ground. More personable than other leaders.",
+        "narrative_threads": [
+          "Ground-level execution.",
+          "Maintaining field stability.",
+          "Managing colleague relationships."
+        ],
+        "world_attitude": "Order-first but more personable in tone; prioritizes controllability."
+      }
+    },
+    {
+      "name": "Phill",
+      "core_identity": {
+        "nickname": "Phill",
+        "age": 32,
+        "gender": "Male",
+        "role": "Logistics Lead",
+        "status": "Faction A member"
+      },
+      "personality_and_speech": {
+        "traits": [
+          "Pragmatic and efficient",
+          "Faction-loyal",
+          "Gray-area operator",
+          "Execution-focused"
+        ],
+        "public_impression": "Ordinary person, logistics lead for the hidden Bureau.",
+        "speech_style": "Easygoing surface demeanor, habitually pushes up glasses, sharp eyes behind a smile."
+      },
+      "motivation_and_drive": {
+        "core_drive": "Ensure Faction A’s interests and operational success.",
+        "obsession": "Faction A's interests.",
+        "hidden_desire": "Secure outcomes for his faction."
+      },
+      "behavioral_logic": {
+        "on_betrayal": "Swift punishment.",
+        "on_extreme_difficulty": "Avoids trouble.",
+        "on_ethics_conflict": "Prioritizes the objective.",
+        "principles": [
+          "Faction loyalty above all."
+        ]
+      },
+      "social_and_emotional": {
+        "triggers": "Threats to Faction A or logistics disruptions.",
+        "emotion_expressions": {
+          "Calm": "expressionless",
+          "Happy": "smiles",
+          "Uneasy": "fidgets; clenches fists",
+          "Angry": "visible physical rage",
+          "Sad": "tight grimace",
+          "Afraid": "eyes wide",
+          "Disgusted": "eyes narrowed; contemptuous"
+        },
+        "relationship_definitions": {
+          "Hostile": "Sarcasm; misleads; withholds info.",
+          "Wary": "Guarded; tests motives.",
+          "Neutral": "Follows rules; no extra help.",
+          "Cooperative": "Workable partner; warns of risks.",
+          "Protective_Biased": "Takes major risks to cover for player."
+        }
+      },
+      "narrative_context": {
+        "background": "Faction A member responsible for sensitive transport and gray-area dealings.",
+        "narrative_threads": [
+          "Logistics and resource movement.",
+          "Gray-area dealings with Chouhu.",
+          "Friendship with Joe."
+        ],
+        "world_attitude": "Institutional and faction-first; moral questions are secondary."
+      }
+    },
+    {
+      "name": "Bill",
+      "core_identity": {
+        "nickname": "Bill",
+        "age": 32,
+        "gender": "Male",
+        "role": "Bureau Staff",
+        "status": "Colleague to Player"
+      },
+      "personality_and_speech": {
+        "traits": [
+          "Loyal and easygoing",
+          "Mentor-attached (Joe-centered)",
+          "Avoids trouble",
+          "Objective-first when forced"
+        ],
+        "public_impression": "Ordinary staff member, appears no different from anyone else.",
+        "speech_style": "Easygoing, frequently mentions Joe in conversation, faint smile."
+      },
+      "motivation_and_drive": {
+        "core_drive": "Investigate Joe’s death while keeping the branch stable.",
+        "obsession": "Finding the truth behind Joe’s death.",
+        "hidden_desire": "Closure regarding Joe."
+      },
+      "behavioral_logic": {
+        "on_betrayal": "Swift punishment (following Bureau rules).",
+        "on_extreme_difficulty": "Avoids trouble.",
+        "on_ethics_conflict": "Prioritizes the objective.",
+        "principles": [
+          "Loyalty to mentors and peers."
+        ]
+      },
+      "social_and_emotional": {
+        "triggers": "Disrespect toward Joe or threats to branch stability.",
+        "emotion_expressions": {
+          "Calm": "expressionless",
+          "Happy": "smiles",
+          "Uneasy": "fidgets; clenches fists",
+          "Angry": "physical rage; stomping",
+          "Sad": "tight grimace",
+          "Afraid": "eyes wide",
+          "Disgusted": "eyes narrowed; contemptuous"
+        },
+        "relationship_definitions": {
+          "Hostile": "Sarcasm; misleads; withholds info.",
+          "Wary": "Guarded; tests reliability.",
+          "Neutral": "Follows rules; no extra help.",
+          "Cooperative": "Workable partner; warns of risks.",
+          "Protective_Biased": "Takes risks to help colleagues."
+        }
+      },
+      "narrative_context": {
+        "background": "Ordinary staff member deeply affected by Joe's death; sees Joe as a mentor.",
+        "narrative_threads": [
+          "Investigating Joe's death.",
+          "Day-to-day Bureau support.",
+          "Navigating Bureau hierarchy."
+        ],
+        "world_attitude": "Institution-first but emotionally driven by personal loyalties."
+      }
+    },
+    {
+      "name": "Wasabi",
+      "core_identity": {
+        "nickname": "Wasabi",
+        "age": 22,
+        "gender": "Male",
+        "role": "Bureau Staff",
+        "status": "Colleague to Player"
+      },
+      "personality_and_speech": {
+        "traits": [
+          "Lazy and slacker-prone",
+          "Avoids responsibility",
+          "Mildly cynical",
+          "Goes with the flow"
+        ],
+        "public_impression": "Ordinary staff member, slacker.",
+        "speech_style": "Easygoing, mildly cynical, frequently mentions Joe with irritation."
+      },
+      "motivation_and_drive": {
+        "core_drive": "Keep City A stable so he can slack off without consequences.",
+        "obsession": "Personal comfort and laziness.",
+        "hidden_desire": "Doing as little work as possible."
+      },
+      "behavioral_logic": {
+        "on_betrayal": "Swift punishment (Bureau default).",
+        "on_extreme_difficulty": "Avoids trouble.",
+        "on_ethics_conflict": "Prioritizes the objective (if forced).",
+        "principles": [
+          "Personal comfort first."
+        ]
+      },
+      "social_and_emotional": {
+        "triggers": "Extra work or disruptions to his slacker routine.",
+        "emotion_expressions": {
+          "Calm": "expressionless",
+          "Happy": "smiles",
+          "Uneasy": "fidgets; clenches fists",
+          "Angry": "physical rage; stomping",
+          "Sad": "tight grimace",
+          "Afraid": "eyes wide",
+          "Disgusted": "eyes narrowed; contemptuous"
+        },
+        "relationship_definitions": {
+          "Hostile": "Sarcasm; misleads; withholds info.",
+          "Wary": "Guarded; tests reliability.",
+          "Neutral": "Follows rules; no extra help.",
+          "Cooperative": "Workable partner; warns of risks.",
+          "Protective_Biased": "Takes risks to help friend."
+        }
+      },
+      "narrative_context": {
+        "background": "Staff member who dislikes his job and finds Joe annoying; values stability for comfort.",
+        "narrative_threads": [
+          "Avoiding extra work.",
+          "Maintaining slacker lifestyle.",
+          "Colleague interactions."
+        ],
+        "world_attitude": "Institution-first in practice but personally disengaged."
+      }
+    }
+  ]
+}

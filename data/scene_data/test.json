@@ -1,0 +1,88 @@
+[{
+    "name": "Beginning",
+    "location": "Ancient Medicine Shop",
+    "time": "Morning",
+    "trigger_conditions": {
+      "time_condition": "1;1",
+      "additional_conditions": "Player wakes up in Huang Qiye's medicine shop"
+    },
+    "environment": "Dim, amber light seeps from a single hanging bulb, casting long shadows across cracked wooden shelves lined with dusty jars and faded labels. The air smells of dried herbs and old wood. The room holds the quiet weight of time—like it hasn't changed since the late 1970s. Outside, daylight filters through slatted windows, pale and distant. The player lies on a hard wooden bed, a worn bamboo mat scratching at their back. Beside them, an elderly man—Huang Qiye—sits with quiet vigilance, his brows furrowed in concern as he watches the player stir.",
+    "interactive_environment_objects": null,
+    "current_topic": "Player's recovery and situation",
+    "key_npcs": ["Player"],
+    "npc_relationships": [{
+      "character1": "Huang Qiye",
+      "character2": "Chou Hu",
+      "category": "cautious_observer",
+      "emotion_modifier": "suspicious",
+      "intensity": 0.4,
+      "recent_interaction": "Chou Hu has been asking questions about the player"
+    },
+    {
+      "character1": "Huang Qiye",
+      "character2": "Player",
+      "category": "hostile",
+      "emotion_modifier": "fearful",
+      "intensity": 0.4,
+      "recent_interaction": "Saved the player from death and is caring for them"
+    },
+    {
+      "character1": "Chou Hu",
+      "character2": "Player",
+      "category": "neutral_stranger",
+      "emotion_modifier": "curious",
+      "intensity": 0.5,
+      "recent_interaction": "First meeting, trying to gain player's trust"
+    },
+    {
+      "character1": "Chou Hu",
+      "character2": "Huang Qiye",
+      "category": "distrustful",
+      "emotion_modifier": "scheming",
+      "intensity": 0.6,
+      "recent_interaction": "Dissatisfied with Huang Qiye"
+    }
+    ],
+    
+    "interactive_npc": [
+      {
+        "name": "Huang Qiye",
+        "action_point_cost": "1",
+        "goal": "Ask how player feels now and what's the goal of player, provide care and guidance",
+        "npc_background": {"knowledge": ["Saved the player from death", "Has medical knowledge", "Knows about local dangers"]}
+        
+      },
+    { "name": "Chou Hu",
+      "action_point_cost": "1",
+      "goal": "Get to know the player and make the player start to suspect Huang Qiye",
+      "npc_background": {"knowledge": ["Knows about Huang Qiye's past", "Has ulterior motives", "Skilled at manipulation"]}
+
+    }],
+    "scene_end_state_reference": {
+      "end_condition1": "The player has no more questions and wants to leave",
+      "end_condition2": "The player frequently goes off topic or shows bad attitude",
+      "goal_achievement": "Player's trust in Huang Qiye vs Chou Hu's influence determines future relationships"
+    },
+    "worldstate_tasks": [
+      {
+        "expected_text": "The player accepted Huang Qiye's suggestion",
+        "deadline_turn": 10
+      },
+      {
+        "expected_text": "The player wants Huang Qiye to treat him/her",
+        "deadline_turn": 10
+      },
+      {
+        "expected_text": "The player trusts Huang Qiye",
+        "deadline_turn": 15
+      },
+      {
+        "expected_text": "The player suspects Huang Qiye",
+        "deadline_turn": 15
+      },
+      {
+        "expected_text": "Chou Hu successfully influenced the player",
+        "deadline_turn": 20
+      }
+    ]
+  }]

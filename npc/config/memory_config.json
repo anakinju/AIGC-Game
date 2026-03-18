@@ -1,0 +1,22 @@
+{
+  "enable_memory_system": true,
+  "enable_memory_storage": true,
+  "scene": "default_scene",
+  "layer": 1,
+  "milvus_host": "localhost",
+  "milvus_port": 19530,
+  "db_name": "conversation_history",
+  "auto_store": true,
+  "debug_mode": false,
+  "_comment": {
+    "enable_memory_system": "高层级Memory系统开关，false时完全禁用所有memory功能",
+    "enable_memory_storage": "是否启用记忆存储功能",
+    "scene": "场景标识符",
+    "layer": "记忆层级",
+    "milvus_host": "Milvus服务器地址",
+    "milvus_port": "Milvus服务器端口",
+    "db_name": "数据库名称",
+    "auto_store": "是否自动存储记忆",
+    "debug_mode": "是否启用调试模式"
+  }
+}

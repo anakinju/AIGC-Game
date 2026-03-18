@@ -1,0 +1,96 @@
+{
+  "name": "Alice's Violent Behavior Discussion",
+  "location": "Abandoned Warehouse",
+  "time": "Evening",
+  "trigger_conditions": {
+    "time_condition": "After witnessing Alice's assault",
+    "additional_conditions": "NPCs gather to discuss the incident"
+  },
+  "environment": "A dimly lit abandoned warehouse where NPCs often gather to discuss recent events. The air is thick with tension and whispered conversations. Shadows dance across the concrete walls as the group processes the shocking news about Alice's violent behavior.",
+  "interactive_environment_objects": null,
+  "current_topic": "Alice's violent behavior",
+  "key_npcs": ["Alice"],
+  "npc_relationships": {
+    "Meredith Stout": {
+      "Jackie Welles": {
+        "category": "trusted_partner",
+        "emotion_modifier": "",
+        "intensity": 0.75,
+        "recent_interaction": "Working together on understanding Alice's situation"
+      },
+      "Dum Dum": {
+        "category": "distrustful",
+        "emotion_modifier": "cautious",
+        "intensity": 0.6,
+        "recent_interaction": "Disagreement about Alice's character"
+      },
+      "Alice": {
+        "category": "cautious_observer",
+        "emotion_modifier": "concerned",
+        "intensity": 0.5,
+        "recent_interaction": "Witnessed Alice's violent behavior"
+      }
+    },
+    "Jackie Welles": {
+      "Alice": {
+        "category": "neutral_stranger",
+        "emotion_modifier": "",
+        "intensity": 0.5,
+        "recent_interaction": "Heard about Alice from others"
+      },
+      "Meredith Stout": {
+        "category": "trusted_partner",
+        "emotion_modifier": "",
+        "intensity": 0.75,
+        "recent_interaction": "Collaborating to understand the situation"
+      },
+      "Dum Dum": {
+        "category": "cautious_observer",
+        "emotion_modifier": "",
+        "intensity": 0.4,
+        "recent_interaction": "Observing Dum Dum's defensive stance about Alice"
+      }
+    },
+    "Dum Dum": {
+      "Alice": {
+        "category": "intimate_ally",
+        "emotion_modifier": "protective",
+        "intensity": 0.8,
+        "recent_interaction": "Long-time friendship, defending Alice's character"
+      },
+      "Meredith Stout": {
+        "category": "rival",
+        "emotion_modifier": "defensive",
+        "intensity": 0.6,
+        "recent_interaction": "Opposing views about Alice"
+      },
+      "Jackie Welles": {
+        "category": "cautious_observer",
+        "emotion_modifier": "",
+        "intensity": 0.4,
+        "recent_interaction": "Uncertain about Jackie's stance on Alice"
+      }
+    }
+  },
+  "npc_background": {
+    "Dum Dum": {"knowledge": ["I know Alice for a long time.Alice is a kind person"]},
+    "Jackie Welles": {"knowledge": ["I've heard about Alice from others"]},
+    "Meredith Stout": {"knowledge": ["I witnessed Alice's violent behavior.This is concerning behavior"]}
+  },
+  "npc_purposes": {
+    "Meredith Stout": {"goal": "convince others about Alice's violent behavior"},
+    "Jackie Welles": {"goal": "understand what really happened"},
+    "Dum Dum": {"goal": "defend Alice's character"}
+  },
+  "interactive_npc": ["Meredith Stout", "Jackie Welles", "Dum Dum"],
+  
+  "end_conditions": {
+    "Jackie Welles-Alice": {"state": ["hostile", "distant"], "change": "distant"},
+    "Dum Dum-Alice": {"state": ["hostile", "distant"], "change": "distant"}
+  },
+  "scene_end_state_reference": {
+    "end_condition1": "Jackie and DumDum are convinced of Alice's violent nature and distance themselves",
+    "end_condition2": "The group fails to reach consensus and discussion ends in disagreement",
+    "goal_achievement": "Meredith successfully convinces others about Alice's violent behavior"
+  }
+} 

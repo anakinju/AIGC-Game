@@ -1,0 +1,25 @@
+# environment
+.env
+
+# virtual environment
+peotry.lock
+**/__pycache__/
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+
+#systen cache
+.DS_Store
+Thumbs.db
+
+#data
+npc/knowledge/npc_knowledge/
+npc/knowledge/npc_memories/

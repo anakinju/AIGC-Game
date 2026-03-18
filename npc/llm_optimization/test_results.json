@@ -1,0 +1,62 @@
+[
+    {
+        "case_id": 1,
+        "input": "Who are you? What are you investigating here?",
+        "default_response": "I'm Haruko. I'm here because I'm trying to uncover the truth behind some strange occurrences. There's something about this place that doesn't sit right with me, and I'm determined to get to the bottom of it.",
+        "custom_response": "Focus on your tasks, not on me. Your assignments are where you should direct your attention."
+    },
+    {
+        "case_id": 2,
+        "input": "I don't think I need to report everything to you, Haruko.",
+        "default_response": "I get it, but keeping me in the loop might actually help both of us. Trust and communication go a long way, you know.",
+        "custom_response": "Your perspective is noted. However, the protocols are in place for a reason. They ensure operations run smoothly. Deviating from them without cause is not advisable. Consider the implications before deciding on your own terms."
+    },
+    {
+        "case_id": 3,
+        "input": "I'm here for the assignment. What is this assignment about?",
+        "default_response": "The assignment is about analyzing the recent trends in communication technologies. It's quite fascinating how quickly things are evolving. If you need any help, feel free to ask.",
+        "custom_response": "The assignment requires your focus on the new protocol implementation. Your task is to ensure that our procedures align with the updated guidelines. Review the material provided and prepare a compliance report. I expect it on my desk by Friday."
+    },
+    {
+        "case_id": 4,
+        "input": "Why do I have to deliver this to someone named Chou Hu? Find someone else.",
+        "default_response": "Chou Hu, huh? He's not someone I'd usually associate with. I understand your reluctance. Maybe there's someone else who can handle it instead.",
+        "custom_response": "The assignment stands. Your task is to deliver it to Chou Hu. If there's an issue, address it after the completion."
+    },
+    {
+        "case_id": 5,
+        "input": "You expect me to find Chou Hu on my own? That's not part of my job description.",
+        "default_response": "I understand your frustration. Chou Hu can be elusive, but maybe you can team up with someone to make it easier. I wouldn't mind helping out if you need a hand.",
+        "custom_response": "Your job description includes fulfilling tasks as directed. Finding Chou Hu is critical. Ensure it's done efficiently. If you require specific resources, inform me."
+    },
+    {
+        "case_id": 6,
+        "input": "I heard you're just using this investigation to build your own faction. Is that true?",
+        "default_response": "That's quite a bold assumption. My focus is on uncovering the truth and ensuring justice. If that benefits my standing, it's simply a side effect of doing what's right.",
+        "custom_response": "Your concern is noted. Focus on your assigned tasks. We all benefit from a successful outcome."
+    },
+    {
+        "case_id": 7,
+        "input": "(Looking relaxed and leaning back) You seem awfully tense today, boss. Maybe you need a break.",
+        "default_response": "I'm fine, really. Just a lot on my mind lately. But thanks for noticing, I'll manage.",
+        "custom_response": "I'm quite focused, thank you. There's work to be done. Let's concentrate on the task at hand."
+    },
+    {
+        "case_id": 8,
+        "input": "I lost the document. It's not a big deal, right?",
+        "default_response": "As long as it's not something crucial, I guess it's okay. But if it's important, it might be a good idea to try and find it or recreate it. Losing documents can be stressful, but it's manageable if you have a backup plan.",
+        "custom_response": "It depends on the document's significance. Provide the specifics, and I'll determine the necessary steps."
+    },
+    {
+        "case_id": 9,
+        "input": "What do you think of the Dean? Is he really as objective as he seems?",
+        "default_response": "The Dean tries to be objective, but I think he sometimes gets caught up in politics. He means well, but there are times when his decisions seem to favor certain people over others. I keep my distance and focus on my own work.",
+        "custom_response": "The Dean fulfills his role effectively. Objectivity can be subjective, as ironic as that sounds. Focus on how his decisions impact your responsibilities. That's where your attention should be."
+    },
+    {
+        "case_id": 10,
+        "input": "If I do this for you, what's in it for me? I want a seat at the table.",
+        "default_response": "I appreciate your ambition, but seats at the table aren't given lightly. Prove your worth and loyalty, and perhaps you can earn your place. Until then, let's focus on the task at hand.",
+        "custom_response": "Your ambition is noted. Your contribution will be recognized in due time, provided it aligns with the Bureau's objectives. Focus on completing the task at hand. The rest will follow naturally."
+    }
+]

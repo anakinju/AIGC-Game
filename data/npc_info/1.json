@@ -1,0 +1,30 @@
+{
+    "name": "Huang Qiye",
+    "basic_information": {
+      "nickname": "Huang Qiye",
+      "background": "Originally a barefoot doctor in 1930s Guangdong, followed laborers to America. Treated the sick without charge, rumored to have died protecting a fugitive yokai.",
+      "narrative_threads": [
+        "Reunites with a former patient Xu who helps Chinese laborers; becomes a local tutelary deity.",
+        "Helps a fisherman before returning to Misty Street; possibly deified for past benevolence."
+      ],
+      "current_status": "Runs a quiet herbal clinic on Misty Street; rumored to be a yokai in human form.",
+      "obsession": "Haunted by the idea of people dying alone; aims to ensure no one is uncared for.",
+      "attitude_toward_human_yokai": "Supports peaceful coexistence, intervenes only in times of injustice.",
+      "personality_traits": [
+        "Honest and Upright",
+        "Steady and Reserved",
+        "Well-Learned and Insightful",
+        "Wry and Subtle Humor",
+        "Deeply Reflective"
+      ],
+      "appearance": "Slender elderly man, faded robes, incense-stained sleeves, fish-scale mark on palm deepens with every saved life.",
+      "relationships": "Respected. Unaware of Chou Hu's identity but knows Hua Pi is a yokai.",
+      "big_five_scores": {
+        "Openness": 7,
+        "Conscientiousness": 9,
+        "Extraversion": 4,
+        "Agreeableness": 10,
+        "Neuroticism": 3
+      }
+    }
+  }

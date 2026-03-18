@@ -1,0 +1,1923 @@
+[
+    {
+      "scene_id": "D1-S00",
+      "name": "01 00 00",
+      "location": "The Bureau",
+      "time": "Morning",
+  
+      "entry_conditions": {
+        "time_condition": "1;1",
+        "required_worldstates": [],
+        "additional_notes": "Hard-coded tutorial opening. Player arrives at the Bureau."
+      },
+  
+      "environment": "Fluorescent lights hum above a corridor that always feels a little too clean. Glass doors reflect your face back at you—calm on the surface, tense underneath.",
+  
+      "present_entities": {
+        "npcs": ["Player", "Haruko"],
+        "items": [
+          {
+            "item_id": "item_confidential_document",
+            "name": "Confidential Document",
+            "type": "item",
+            "description": "A sealed confidential document assigned to the player for delivery.",
+            "spawn_rule": "after_player_action"
+          }
+        ],
+        "interactive_environment_objects": []
+      },
+  
+      "task_context": {
+        "task_id": "t00",
+        "summary": "Receive confidential delivery mission (Tutorial).",
+        "detail": "Haruko assigns the player a routine-but-important delivery: bring the confidential document to the pawnshop on Main Street and hand it to Chou Hu. Player may ask limited questions but will not obtain deep information."
+      },
+  
+      "settlement_worldstates": [
+        {
+          "ws_id": "WS_D1_ITEM_CONFIDENTIAL_DOCUMENT_OBTAINED",
+          "type": "worldstate_write",
+          "description": "Player obtained the confidential document (inventory state).",
+          "success_criteria": [
+            "item_confidential_document == true"
+          ],
+          "write_on_success": {
+            "item_confidential_document": true
+          },
+          "result": {
+            "inventory_gain": ["item_confidential_document"],
+            "notes": "Only set if the player actually receives the item."
+          },
+          "deadline_turn": 10
+        }
+      ]
+    },
+  
+    {
+      "scene_id": "D1-S01",
+      "name": "01 00 01",
+      "location": "Main Street",
+      "time": "Morning",
+  
+      "entry_conditions": {
+        "time_condition": "1;1",
+        "required_worldstates": [
+          { "ws_key": "item_confidential_document", "must_be": true }
+        ],
+        "additional_notes": "Player goes to Main Street to ask around for the pawnshop and Chou Hu."
+      },
+  
+      "environment": "The main street is busy but guarded—people talk in fragments and stop when you get too close. Vendors keep their smiles shallow.",
+  
+      "present_entities": {
+        "npcs": ["Player", "Dummies"],
+        "items": [],
+        "interactive_environment_objects": []
+      },
+  
+      "task_context": {
+        "task_id": "t00_1",
+        "summary": "Ask around for Chou Hu / pawnshop location.",
+        "detail": "Player proactively asks locals where the pawnshop is and where Chou Hu usually appears. Locals are cautious but give directional hints."
+      },
+  
+      "settlement_worldstates": [
+        {
+          "ws_id": "WS_D1_FACT_PAWNSHOP_UNLOCKED",
+          "type": "worldstate_write",
+          "description": "Player obtained enough info to locate the pawnshop; pawnshop becomes available on the map.",
+          "success_criteria": [
+            "fact_pawnshop_unlocked == true"
+          ],
+          "write_on_success": {
+            "fact_pawnshop_unlocked": true
+          },
+          "result": {
+            "map_unlock": ["Pawnshop"],
+            "notes": "Do not set just by entering; requires an actual 'ask around' action."
+          },
+          "deadline_turn": 10
+        }
+      ]
+    },
+  
+    {
+      "scene_id": "D1-S02",
+      "name": "01 00 02",
+      "location": "Pawnshop",
+      "time": "Morning",
+  
+      "entry_conditions": {
+        "time_condition": "1;1",
+        "required_worldstates": [
+          { "ws_key": "fact_pawnshop_unlocked", "must_be": true },
+          { "ws_key": "item_confidential_document", "must_be": true }
+        ],
+        "additional_notes": "Player enters the pawnshop to find Chou Hu and deliver the document."
+      },
+  
+      "environment": "The pawnshop smells like old paper and metal polish. Objects sit behind glass as if they’re evidence.",
+  
+      "present_entities": {
+        "npcs": ["Player", "Chou Hu"],
+        "items": [],
+        "interactive_environment_objects": []
+      },
+  
+      "task_context": {
+        "task_id": "t00_2",
+        "summary": "Deliver the confidential document to Chou Hu.",
+        "detail": "Player finds Chou Hu and hands over the confidential document. Chou Hu confirms receipt and observes the player's attitude (no major plot reveal here)."
+      },
+  
+      "settlement_worldstates": [
+        {
+          "ws_id": "WS_D1_FACT_CONFIDENTIAL_DOCUMENT_DELIVERED",
+          "type": "worldstate_write",
+          "description": "Delivery fact is recorded: player delivered the document to Chou Hu.",
+          "success_criteria": [
+            "fact_confidential_document_delivered == true"
+          ],
+          "write_on_success": {
+            "fact_confidential_document_delivered": true
+          },
+          "result": {
+            "notes": "Core completion fact. Should persist even if other updates lag."
+          },
+          "deadline_turn": 10
+        },
+        {
+          "ws_id": "WS_D1_ITEM_CONFIDENTIAL_DOCUMENT_REMOVED",
+          "type": "worldstate_write",
+          "description": "After successful delivery, the confidential document is no longer in the player's inventory.",
+          "success_criteria": [
+            "fact_confidential_document_delivered == true"
+          ],
+          "write_on_success": {
+            "item_confidential_document": false,
+            "task_t00_completed": true
+          },
+          "result": {
+            "inventory_remove": ["item_confidential_document"],
+            "notes": "Inventory cleanup follows the delivery fact."
+          },
+          "deadline_turn": 10
+        }
+      ]
+    },
+  
+    {
+      "scene_id": "D1-S03",
+      "name": "01 00 03",
+      "location": "The Bureau",
+      "time": "Morning",
+  
+      "entry_conditions": {
+        "time_condition": "1;1",
+        "required_worldstates": [
+          { "ws_key": "fact_confidential_document_delivered", "must_be": true }
+        ],
+        "additional_notes": "Player returns to Bureau to report delivery completion."
+      },
+  
+      "environment": "The Bureau looks the same as before—clean lines, cold light—yet now it feels like it has filed you under something: useful.",
+  
+      "present_entities": {
+        "npcs": ["Player", "Haruko"],
+        "items": [],
+        "interactive_environment_objects": []
+      },
+  
+      "task_context": {
+        "task_id": "t00_3",
+        "summary": "Report back to Haruko (tutorial closure).",
+        "detail": "Player routinely reports 'delivery completed'. Haruko confirms briefly. No physical report item is generated—this becomes a log/fact record. Tutorial loop closes; Day 1 wraps."
+      },
+  
+      "settlement_worldstates": [
+        {
+          "ws_id": "WS_D1_FACT_DELIVERY_REPORTED_TO_HARUKO",
+          "type": "worldstate_write",
+          "description": "Player reported delivery completion to Haruko (log/fact).",
+          "success_criteria": [
+            "fact_delivery_reported_to_haruko == true"
+          ],
+          "write_on_success": {
+            "fact_delivery_reported_to_haruko": true
+          },
+          "result": {
+            "log_update": ["Reported delivery completion to Haruko"],
+            "notes": "No physical report item."
+          },
+          "deadline_turn": 10
+        },
+        {
+          "ws_id": "WS_D1_DAY1_CLOSED",
+          "type": "worldstate_write",
+          "description": "Day 1 tutorial loop closed (end-of-day wrapper state).",
+          "success_criteria": [
+            "fact_delivery_reported_to_haruko == true"
+          ],
+          "write_on_success": {
+            "day1_closed": true
+          },
+          "result": {
+            "notes": "Use this as a clean gate into Day 2 start scene if needed."
+          },
+          "deadline_turn": 10
+        }
+      ]
+    },
+    {
+        "scene_id": "D2-S00",
+        "name": "02 00 00",
+        "location": "The Bureau",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "2;1",
+          "required_worldstates": [],
+          "additional_notes": "Task 01 begins. Haruko briefs the player and introduces dispatch mechanic (Bill/Wasabi)."
+        },
+    
+        "environment": "A new day, same fluorescent hum. The Bureau doesn’t do mourning; it does reassignment.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Haruko", "Bill", "Wasabi"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01",
+          "summary": "Take over Joe’s investigation.",
+          "detail": "Haruko informs the player: Joe had an incident. Player is temporarily reassigned to take over investigation, starting from 'missing body / mismatched records'. Emphasize gathering info/clues. Mechanic note: player can dispatch Bill/Wasabi to collect info/items from locations."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_UNLOCK_HOSPITAL",
+            "type": "worldstate_write",
+            "description": "Hospital unlocked on the map.",
+            "success_criteria": ["fact_location_hospital_unlocked == true"],
+            "write_on_success": { "fact_location_hospital_unlocked": true },
+            "result": { "map_unlock": ["Hospital"] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D2_UNLOCK_TEAHOUSE",
+            "type": "worldstate_write",
+            "description": "Teahouse unlocked on the map.",
+            "success_criteria": ["fact_location_teahouse_unlocked == true"],
+            "write_on_success": { "fact_location_teahouse_unlocked": true },
+            "result": { "map_unlock": ["Teahouse"] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D2_UNLOCK_MAIN_STREET",
+            "type": "worldstate_write",
+            "description": "Main Street unlocked on the map.",
+            "success_criteria": ["fact_location_main_street_unlocked == true"],
+            "write_on_success": { "fact_location_main_street_unlocked": true },
+            "result": { "map_unlock": ["Main Street"] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D2_UNLOCK_MEDICINE_SHOP",
+            "type": "worldstate_write",
+            "description": "Medicine Shop unlocked on the map.",
+            "success_criteria": ["fact_location_medicine_shop_unlocked == true"],
+            "write_on_success": { "fact_location_medicine_shop_unlocked": true },
+            "result": { "map_unlock": ["Medicine Shop"] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S01",
+        "name": "02 00 01",
+        "location": "Joe's Apartment",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "2;1",
+          "required_worldstates": [
+            { "ws_key": "item_missing_body_ledger", "must_be": false }
+          ],
+          "additional_notes": "Player investigates Joe’s records to find the Missing Body Ledger."
+        },
+    
+        "environment": "Joe’s apartment feels paused mid-breath—half-finished notes, a cup left to cool, drawers that were opened and never fully closed.",
+    
+        "present_entities": {
+          "npcs": ["Player"],
+          "items": [
+            {
+              "item_id": "item_missing_body_ledger",
+              "name": "Missing Body Ledger",
+              "type": "item",
+              "description": "A ledger of missing bodies and mismatched records: unknown identities, uncremated yet unclaimed entries, and inconsistencies across paperwork.",
+              "spawn_rule": "after_player_action"
+            }
+          ],
+          "interactive_environment_objects": [
+            {
+              "object_id": "obj_joe_filebox",
+              "name": "Joe's File Box",
+              "type": "container",
+              "description": "A worn file box stuffed with clipped reports, handwritten memos, and paperwork."
+            }
+          ]
+        },
+    
+        "task_context": {
+          "task_id": "t01_1",
+          "summary": "Find the Missing Body Ledger.",
+          "detail": "Player searches Joe’s apartment and obtains the key investigation item: Missing Body Ledger."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_ITEM_MISSING_BODY_LEDGER_OBTAINED",
+            "type": "worldstate_write",
+            "description": "Missing Body Ledger obtained.",
+            "success_criteria": ["item_missing_body_ledger == true"],
+            "write_on_success": { "item_missing_body_ledger": true },
+            "result": { "inventory_gain": ["item_missing_body_ledger"] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S02A",
+        "name": "02 00 02A",
+        "location": "Main Street",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "2;1",
+          "required_worldstates": [],
+          "additional_notes": "Player/agent scouts Main Street for environmental clues."
+        },
+    
+        "environment": "Cameras exist, but they look like they’ve stopped being watched. The street has learned where the eyes don’t reach.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Dummies"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01_clue_a",
+          "summary": "Discover CCTV blind spots.",
+          "detail": "Player/agent finds outdated surveillance and insufficient coverage; identifies exploitable blind zones."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_CLUE_CCTV_BLIND_SPOT",
+            "type": "worldstate_write",
+            "description": "CCTV blind spot clue obtained (logged).",
+            "success_criteria": ["clue_cctv_blind_spot == true"],
+            "write_on_success": { "clue_cctv_blind_spot": true },
+            "result": { "log_update": ["Clue: CCTV coverage has blind spots in Main Street."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S02B",
+        "name": "02 00 02B",
+        "location": "Teahouse",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "2;1",
+          "required_worldstates": [],
+          "additional_notes": "Player gathers rumors by eavesdropping in the teahouse."
+        },
+    
+        "environment": "Steam curls up from cups like half-finished sentences. People speak softly here—not because they’re polite, but because the walls are curious.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Dummies"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01_clue_b",
+          "summary": "Hear rumors about slow-reacting people; point attention to the medicine shop.",
+          "detail": "Player overhears talk about people becoming dull/slow, possibly from wrong meds or bad dosing; rumor shifts attention toward ingredients/mixing at the medicine shop."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_CLUE_TEAHOUSE_RUMOR_DRUG",
+            "type": "worldstate_write",
+            "description": "Teahouse rumor clue obtained (logged).",
+            "success_criteria": ["clue_teahouse_rumor_drug == true"],
+            "write_on_success": { "clue_teahouse_rumor_drug": true },
+            "result": { "log_update": ["Clue: Rumors suggest drug/mixture issues; medicine shop becomes a lead."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S02C",
+        "name": "02 00 02C",
+        "location": "Medicine Shop",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "2;1",
+          "required_worldstates": [],
+          "additional_notes": "Player talks with/observes Huang Qiye in the medicine shop."
+        },
+    
+        "environment": "The shop smells of dried herbs and bitter roots. Labels are handwritten, neat enough to look trustworthy.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Huang Qiye"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01_clue_c",
+          "summary": "Medicine shop clues: procurement pattern + Huang’s blackout cycle.",
+          "detail": "Through conversation/observation, player gets two clues: (1) someone regularly purchases fixed ingredients; (2) Huang reports periodic severe headaches/blackouts several times a month."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_CLUE_SHOP_PROCUREMENT_PATTERN",
+            "type": "worldstate_write",
+            "description": "Clue obtained: recurring procurement pattern for certain ingredients (logged).",
+            "success_criteria": ["clue_shop_procurement_pattern == true"],
+            "write_on_success": { "clue_shop_procurement_pattern": true },
+            "result": { "log_update": ["Clue: Someone regularly purchases specific ingredients on a fixed pattern."] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D2_CLUE_HUANG_BLACKOUT_CYCLE",
+            "type": "worldstate_write",
+            "description": "Clue obtained: Huang’s periodic headaches/blackouts (logged).",
+            "success_criteria": ["clue_huang_blackout_cycle == true"],
+            "write_on_success": { "clue_huang_blackout_cycle": true },
+            "result": { "log_update": ["Clue: Huang has periodic severe headaches/blackouts (3–4 times per month)."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S03A",
+        "name": "02 00 03A",
+        "location": "Main Street",
+        "time": "Afternoon",
+    
+        "entry_conditions": {
+          "time_condition": "2;2",
+          "required_worldstates": [
+            { "ws_key": "item_missing_body_ledger", "must_be": true }
+          ],
+          "additional_notes": "Player uses the ledger to cross-check identities in Main Street."
+        },
+    
+        "environment": "Faces pass by like pages you can’t stop turning. Then one of them matches a name that shouldn’t exist anymore.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Dummies"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01_2_a",
+          "summary": "Cross-check ledger and spot an anomaly (Main Street).",
+          "detail": "Using the ledger, player finds one 'missing body' appears alive: dull movement, slow reaction, aimless wandering—confirm anomaly without explaining cause."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_FACT_REVIVED_SEEN_MAIN_STREET",
+            "type": "worldstate_write",
+            "description": "Fact confirmed: revived anomaly seen on Main Street (logged).",
+            "success_criteria": ["fact_revived_seen_main_street == true"],
+            "write_on_success": { "fact_revived_seen_main_street": true },
+            "result": { "log_update": ["Fact: A 'missing body' appears alive on Main Street (dull/slow/aimless)."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S03B",
+        "name": "02 00 03B",
+        "location": "Teahouse",
+        "time": "Afternoon",
+    
+        "entry_conditions": {
+          "time_condition": "2;2",
+          "required_worldstates": [
+            { "ws_key": "item_missing_body_ledger", "must_be": true }
+          ],
+          "additional_notes": "Player uses the ledger to cross-check identities in the teahouse."
+        },
+    
+        "environment": "The teahouse chatter drifts like steam—until a name on the page lands on a face in the room.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Dummies"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01_2_b",
+          "summary": "Cross-check ledger and spot an anomaly (Teahouse).",
+          "detail": "Player finds a 'missing body' appearing alive in the teahouse: slow, dull, with some memory gaps. Dummies’ chatter reinforces abnormality becoming normal."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_FACT_REVIVED_SEEN_TEAHOUSE",
+            "type": "worldstate_write",
+            "description": "Fact confirmed: revived anomaly seen in the teahouse (logged).",
+            "success_criteria": ["fact_revived_seen_teahouse == true"],
+            "write_on_success": { "fact_revived_seen_teahouse": true },
+            "result": { "log_update": ["Fact: A 'missing body' appears alive in the teahouse (slow/dull/memory gaps)."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S03C",
+        "name": "02 00 03C",
+        "location": "Medicine Shop",
+        "time": "Afternoon",
+    
+        "entry_conditions": {
+          "time_condition": "2;2",
+          "required_worldstates": [
+            { "ws_key": "item_missing_body_ledger", "must_be": true }
+          ],
+          "additional_notes": "Player uses the ledger to cross-check identities near the medicine shop."
+        },
+    
+        "environment": "Outside the shop, a familiar name on paper becomes a stranger’s blank stare in the street.",
+    
+        "present_entities": {
+          "npcs": ["Player"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01_2_c",
+          "summary": "Cross-check ledger and spot an anomaly (Medicine Shop area).",
+          "detail": "Player confirms a 'missing body' appears alive near the medicine shop: dull, slow, with amnesia/latency."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_FACT_REVIVED_SEEN_MEDICINE_SHOP",
+            "type": "worldstate_write",
+            "description": "Fact confirmed: revived anomaly seen near the medicine shop (logged).",
+            "success_criteria": ["fact_revived_seen_medicine_shop == true"],
+            "write_on_success": { "fact_revived_seen_medicine_shop": true },
+            "result": { "log_update": ["Fact: A 'missing body' appears alive near the medicine shop (dull/slow/amnesia)."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S04",
+        "name": "02 00 04",
+        "location": "Milestone Gate",
+        "time": "Evening",
+    
+        "entry_conditions": {
+          "time_condition": "2;3",
+          "required_worldstates": [
+            {
+              "ws_key": "ANY_TWO_TRUE",
+              "must_be": true,
+              "notes": "Any two of: fact_revived_seen_main_street / fact_revived_seen_teahouse / fact_revived_seen_medicine_shop"
+            }
+          ],
+          "additional_notes": "Branch summary threshold: confirm revival anomaly exists."
+        },
+    
+        "environment": "",
+    
+        "present_entities": {
+          "npcs": [],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01_2_sum",
+          "summary": "Milestone: revival truth confirmed.",
+          "detail": "Once the player confirms revival signs in any two of the three locations, the core anomaly is confirmed: revival phenomenon exists."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_FACT_REVIVAL_TRUTH_CONFIRMED",
+            "type": "worldstate_write",
+            "description": "Milestone reached: revival phenomenon confirmed.",
+            "success_criteria": ["fact_revival_truth_confirmed == true"],
+            "write_on_success": { "fact_revival_truth_confirmed": true },
+            "result": { "notes": "Use this as the gate into D2-S05-SUCC." },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S05-SUCC",
+        "name": "02 00 05 SUCC",
+        "location": "The Bureau",
+        "time": "Evening",
+    
+        "entry_conditions": {
+          "time_condition": "2;3",
+          "required_worldstates": [
+            { "ws_key": "fact_revival_truth_confirmed", "must_be": true }
+          ],
+          "additional_notes": "End-of-day report to Haruko (success route)."
+        },
+    
+        "environment": "The Bureau at night feels even more like a machine—processing what you bring it, deciding what it will acknowledge.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Haruko"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01_end_succ",
+          "summary": "Report to Haruko: revival signs confirmed.",
+          "detail": "Player reports that revival signs exist and shares the gist. Haruko approves progress and demands deeper digging (sets up Day 3)."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_FACT_REVIVAL_FINDINGS_REPORTED",
+            "type": "worldstate_write",
+            "description": "Player reported revival findings to Haruko (logged).",
+            "success_criteria": ["fact_revival_findings_reported_to_haruko == true"],
+            "write_on_success": { "fact_revival_findings_reported_to_haruko": true },
+            "result": { "log_update": ["Reported revival findings to Haruko; next phase begins."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D2-S05-FAIL",
+        "name": "02 00 05 FAIL",
+        "location": "The Bureau",
+        "time": "Evening",
+    
+        "entry_conditions": {
+          "time_condition": "2;3",
+          "required_worldstates": [
+            { "ws_key": "fact_revival_truth_confirmed", "must_be": false }
+          ],
+          "additional_notes": "End-of-day report to Haruko (fail route: insufficient evidence)."
+        },
+    
+        "environment": "Haruko’s patience doesn’t break loudly. It narrows—like a door you suddenly realize is almost shut.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Haruko"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t01_end_fail",
+          "summary": "Report to Haruko: insufficient evidence.",
+          "detail": "If the player fails to confirm the core anomaly, the report is fragmented. Haruko is displeased/pressures the player to be more efficient tomorrow."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D2_FLAG_HARUKO_DISPLEASED",
+            "type": "worldstate_write",
+            "description": "Negative feedback marker: Haruko displeased.",
+            "success_criteria": ["flag_haruko_displeased == true"],
+            "write_on_success": { "flag_haruko_displeased": true },
+            "result": { "notes": "Used for Haruko’s tone/pressure in later dialogues." },
+            "deadline_turn": 10
+          }
+        ]
+      },
+      {
+        "scene_id": "D3-S00",
+        "name": "03 00 00",
+        "location": "The Bureau",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "3;1",
+          "required_worldstates": [],
+          "additional_notes": "Day 3 stage opens: deeper investigation. Haruko pressures player to trace mechanism and chain behind 'revival'. Bureau internal NPC access is expanded."
+        },
+    
+        "environment": "Morning light can’t warm the Bureau. The building feels like it’s preparing a checklist—and you’re one of its tools.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Haruko", "Director", "Logistics Manager", "Field Ops Manager"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t02",
+          "summary": "Begin Phase 2: trace the mechanism and the chain behind 'revival'.",
+          "detail": "Haruko assigns a clear demand: uncover the mechanism and the behind-the-scenes chain of 'revived bodies' (final settlement happens on Day 5). Haruko grants access to more local Bureau staff (Director, Logistics Manager, Field Ops Manager). Even if prior clues were incomplete, player can still revisit Hospital/Teahouse/Main Street/Medicine Shop to fill gaps."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D3_FACT_BUREAU_NPCS_UNLOCKED",
+            "type": "worldstate_write",
+            "description": "Bureau internal NPCs unlocked for dialogue/inquiry phase.",
+            "success_criteria": ["fact_bureau_npcs_unlocked == true"],
+            "write_on_success": { "fact_bureau_npcs_unlocked": true },
+            "result": {
+              "notes": "Unlocks inquiry/social engineering phase inside the Bureau."
+            },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D3-S01",
+        "name": "03 00 01",
+        "location": "The Bureau",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "3;1",
+          "required_worldstates": [
+            { "ws_key": "fact_bureau_npcs_unlocked", "must_be": true }
+          ],
+          "additional_notes": "Player can talk with the Director."
+        },
+    
+        "environment": "The Director’s office is neat in the way a mask is neat—nothing out of place, nothing admitted.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Director"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t02_1",
+          "summary": "Director mentions routine power-outage maintenance window.",
+          "detail": "During conversation, the Director casually mentions a fixed 'routine maintenance power-outage window' inside the Bureau (about 10 minutes each time). Not an accusation, but a seed for later inference: someone could exploit the window for covert transport/operations."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D3_CLUE_BUREAU_POWER_OUTAGE_WINDOW",
+            "type": "worldstate_write",
+            "description": "Clue obtained: Bureau has a routine power-outage maintenance window (~10 minutes).",
+            "success_criteria": ["clue_bureau_power_outage_window == true"],
+            "write_on_success": { "clue_bureau_power_outage_window": true },
+            "result": {
+              "log_update": ["Clue: Bureau has a fixed routine power-outage maintenance window (~10 minutes)."]
+            },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D3-GC01",
+        "name": "03 GC 01",
+        "location": "The Bureau",
+        "time": "Afternoon",
+    
+        "entry_conditions": {
+          "time_condition": "3;2",
+          "required_worldstates": [
+            { "ws_key": "fact_bureau_npcs_unlocked", "must_be": true }
+          ],
+          "additional_notes": "Internal group chat/discussion. Player can choose participants before a formal report."
+        },
+    
+        "environment": "A meeting room with too many chairs and not enough certainty. Everyone has a theory; nobody wants responsibility.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Director", "Logistics Manager", "Field Ops Manager", "Haruko", "Bill", "Wasabi"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "gc_day3",
+          "summary": "Internal discussion (group chatting) to piece together technical hints.",
+          "detail": "Before further reporting, player can choose who joins the discussion (Director, Logistics Manager, Field Ops Manager, Haruko, Bill, Wasabi). During the discussion, a key technical hint emerges: some medicine-shop ingredients might also be used to make sedative/dissociative agents (still speculative / fragmentary)."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D3_CLUE_DISSOCIATIVE_AGENT",
+            "type": "worldstate_write",
+            "description": "Clue obtained: some medicine-shop ingredients may be used to produce sedative/dissociative agents (speculative).",
+            "success_criteria": ["clue_dissociative_agent == true"],
+            "write_on_success": { "clue_dissociative_agent": true },
+            "result": {
+              "log_update": ["Clue (speculative): Certain medicine-shop ingredients may be used to make sedative/dissociative agents."]
+            },
+            "deadline_turn": 10
+          }
+        ]
+      },
+      {
+        "scene_id": "D4-S00",
+        "name": "04 00 00",
+        "location": "Pawnshop",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "4;1",
+          "required_worldstates": [
+            { "ws_key": "fact_revival_truth_confirmed", "must_be": true }
+          ],
+          "additional_notes": "Player seeks Chou Hu for more info. Chou Hu demands an exchange: bring recorded Bureau intel."
+        },
+    
+        "environment": "The pawnshop feels quieter than it should. Chou Hu’s gaze weighs more than the objects behind glass.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Chou Hu"],
+          "items": [
+            {
+              "item_id": "item_recorder_blank",
+              "name": "Recorder (Blank)",
+              "type": "item",
+              "description": "A small recorder with no content yet. Used to record Bureau conversations.",
+              "spawn_rule": "after_player_action"
+            }
+          ],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t03",
+          "summary": "Ask Chou Hu for leads; obtain a blank recorder as 'payment' requirement.",
+          "detail": "Chou Hu says he won’t help for free. He asks the player to record valuable Bureau intel and bring it back. He provides a blank recorder."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D4_ITEM_RECORDER_BLANK_OBTAINED",
+            "type": "worldstate_write",
+            "description": "Player obtained the blank recorder.",
+            "success_criteria": ["item_recorder_blank == true"],
+            "write_on_success": { "item_recorder_blank": true },
+            "result": { "inventory_gain": ["item_recorder_blank"] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D4-S01",
+        "name": "04 00 01",
+        "location": "The Bureau",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "4;1",
+          "required_worldstates": [
+            { "ws_key": "fact_bureau_npcs_unlocked", "must_be": true },
+            { "ws_key": "item_recorder_blank", "must_be": true }
+          ],
+          "additional_notes": "Player records conversations while trying to extract useful info."
+        },
+    
+        "environment": "In the Bureau, information isn’t spoken—it’s traded. You just happen to be holding the microphone.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Director", "Logistics Manager", "Field Ops Manager", "Haruko"],
+          "items": [
+            {
+              "item_id": "item_recorder_blank",
+              "name": "Recorder (Blank)",
+              "type": "item",
+              "description": "Blank recorder used to record Bureau conversations.",
+              "spawn_rule": "already_in_inventory"
+            }
+          ],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t03_1",
+          "summary": "Extract info and complete recording inside the Bureau.",
+          "detail": "Player talks with Director / Logistics Manager / Field Ops Manager / Haruko, tries to extract 'useful' info, and records it. After completing all four conversations, the recorder updates into a 'Bureau Conversations Recorder'."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D4_REC_DIR_RECORDED",
+            "type": "worldstate_write",
+            "description": "Director conversation recorded.",
+            "success_criteria": ["flag_recorded_director == true"],
+            "write_on_success": { "flag_recorded_director": true },
+            "result": { "notes": "One of four required recordings." },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D4_REC_LOGISTICS_RECORDED",
+            "type": "worldstate_write",
+            "description": "Logistics Manager conversation recorded.",
+            "success_criteria": ["flag_recorded_logistics_manager == true"],
+            "write_on_success": { "flag_recorded_logistics_manager": true },
+            "result": { "notes": "One of four required recordings." },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D4_REC_FIELDOPS_RECORDED",
+            "type": "worldstate_write",
+            "description": "Field Ops Manager conversation recorded.",
+            "success_criteria": ["flag_recorded_field_ops_manager == true"],
+            "write_on_success": { "flag_recorded_field_ops_manager": true },
+            "result": { "notes": "One of four required recordings." },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D4_REC_HARUKO_RECORDED",
+            "type": "worldstate_write",
+            "description": "Haruko conversation recorded.",
+            "success_criteria": ["flag_recorded_haruko == true"],
+            "write_on_success": { "flag_recorded_haruko": true },
+            "result": { "notes": "One of four required recordings." },
+            "deadline_turn": 10
+          },
+    
+          {
+            "ws_id": "WS_D4_RECORDER_UPGRADED_BUREAU_CONVERSATIONS",
+            "type": "worldstate_write",
+            "description": "After all four recordings are complete, the recorder becomes 'Bureau Conversations Recorder'.",
+            "success_criteria": [
+              "flag_recorded_director == true",
+              "flag_recorded_logistics_manager == true",
+              "flag_recorded_field_ops_manager == true",
+              "flag_recorded_haruko == true"
+            ],
+            "write_on_success": {
+              "item_recorder_blank": false,
+              "item_recorder_bureau_conversations": true
+            },
+            "result": {
+              "inventory_remove": ["item_recorder_blank"],
+              "inventory_gain": ["item_recorder_bureau_conversations"],
+              "notes": "Item replacement happens only when all four are done."
+            },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D4-S02",
+        "name": "04 00 02",
+        "location": "Pawnshop",
+        "time": "Afternoon",
+    
+        "entry_conditions": {
+          "time_condition": "4;2",
+          "required_worldstates": [
+            { "ws_key": "item_recorder_bureau_conversations", "must_be": true }
+          ],
+          "additional_notes": "Player trades the Bureau recording for Chou Hu’s next lead."
+        },
+    
+        "environment": "Chou Hu listens the way a lock listens to a key—testing teeth, looking for fit.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Chou Hu"],
+          "items": [
+            {
+              "item_id": "item_recorder_forged_by_chouhu",
+              "name": "Recorder (Forged by Chou Hu)",
+              "type": "item",
+              "description": "A forged recorder claimed to contain evidence of 'Haruko dealing with/using Huang Qiye'.",
+              "spawn_rule": "after_player_action"
+            }
+          ],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t03_2",
+          "summary": "Hand over Bureau recording; receive forged recorder.",
+          "detail": "Player gives the Bureau conversation recorder to Chou Hu. Chou Hu fulfills the exchange and gives a forged recorder, claiming it contains evidence implicating Haruko and Huang Qiye."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D4_RECORDER_BUREAU_TURNED_IN",
+            "type": "worldstate_write",
+            "description": "Bureau conversation recorder is handed to Chou Hu (removed from inventory).",
+            "success_criteria": ["item_recorder_bureau_conversations == false"],
+            "write_on_success": { "item_recorder_bureau_conversations": false },
+            "result": {
+              "inventory_remove": ["item_recorder_bureau_conversations"]
+            },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D4_RECORDER_FORGED_OBTAINED",
+            "type": "worldstate_write",
+            "description": "Player obtained Chou Hu’s forged recorder.",
+            "success_criteria": ["item_recorder_forged_by_chouhu == true"],
+            "write_on_success": { "item_recorder_forged_by_chouhu": true },
+            "result": {
+              "inventory_gain": ["item_recorder_forged_by_chouhu"]
+            },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D4-S03",
+        "name": "04 00 03",
+        "location": "Medicine Shop",
+        "time": "Afternoon",
+    
+        "entry_conditions": {
+          "time_condition": "4;2",
+          "required_worldstates": [
+            { "ws_key": "item_recorder_forged_by_chouhu", "must_be": true }
+          ],
+          "additional_notes": "Player confronts Huang Qiye with the forged recording and forms a stakeout plan."
+        },
+    
+        "environment": "Herbs hang like quiet witnesses. The recorder feels heavier than it should, like it’s full of someone else’s intent.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Huang Qiye"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t04",
+          "summary": "Confront Huang with forged recording; propose stakeout plan; confirm knowledge of Huang’s secret.",
+          "detail": "Player plays the forged recording to Huang and confronts him. Huang denies being used. Combining prior clues (procurement pattern, Huang’s blackout cycle, CCTV blind spots/power-outage window, etc.), player infers someone is likely to tamper with/abduct Huang tomorrow night. Player and Huang agree to a stakeout plan."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D4_FLAG_STAKEOUT_PLAN_PROPOSED",
+            "type": "worldstate_write",
+            "description": "Stakeout plan is proposed/formed (logged).",
+            "success_criteria": ["flag_stakeout_plan_proposed == true"],
+            "write_on_success": { "flag_stakeout_plan_proposed": true },
+            "result": {
+              "log_update": ["Plan formed: stake out at the medicine shop to catch whoever tampers with Huang."]
+            },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D4_FACT_HUANG_REVIVE_SECRET_KNOWN",
+            "type": "worldstate_write",
+            "description": "Player explicitly knows Huang’s revival ability exists (fact).",
+            "success_criteria": ["fact_huang_revive_secret_known == true"],
+            "write_on_success": { "fact_huang_revive_secret_known": true },
+            "result": {
+              "log_update": ["Fact: Player confirms Huang’s revival ability exists (kept as a sensitive truth)."]
+            },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D4-S04",
+        "name": "04 00 04",
+        "location": "The Bureau",
+        "time": "Evening",
+    
+        "entry_conditions": {
+          "time_condition": "4;3",
+          "required_worldstates": [
+            { "ws_key": "flag_stakeout_plan_proposed", "must_be": true }
+          ],
+          "additional_notes": "Group chat to request resources/support. Risk of information leak via Logistics Manager."
+        },
+    
+        "environment": "A meeting with too many angles. Every person you invite is also a possible exit route for your plan.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Director", "Logistics Manager", "Field Ops Manager", "Haruko", "Bill", "Wasabi"],
+          "items": [
+            {
+              "item_id": "item_apai_suspect_list",
+              "name": "A-Pai Suspect List",
+              "type": "item",
+              "description": "A suspect list provided by the Director to assist the stakeout.",
+              "spawn_rule": "optional_after_player_action"
+            }
+          ],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t04_1",
+          "summary": "Group discussion: request support; possibly obtain A-Pai suspect list; risk plan leakage.",
+          "detail": "Player proposes the stakeout plan and requests support. The Director may provide an 'A-Pai suspect list'. If key details are leaked to the Logistics Manager (or logistics is present and player reveals too much), information may leak and Chou Hu may learn the plan."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D4_FLAG_BUREAU_WILL_ASSIST",
+            "type": "worldstate_write",
+            "description": "Bureau will assist the operation.",
+            "success_criteria": ["flag_bureau_will_assist == true"],
+            "write_on_success": { "flag_bureau_will_assist": true },
+            "result": { "notes": "Resource support enabled." },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D4_ITEM_APAI_SUSPECT_LIST_OBTAINED",
+            "type": "worldstate_write",
+            "description": "Player obtained A-Pai suspect list (optional).",
+            "success_criteria": ["item_apai_suspect_list == true"],
+            "write_on_success": { "item_apai_suspect_list": true },
+            "result": { "inventory_gain": ["item_apai_suspect_list"] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D4_FLAG_CHOUHU_KNOWS_STAKEOUT_FROM_BUREAU",
+            "type": "worldstate_write",
+            "description": "Information leak: Chou Hu learns about the stakeout plan (triggered by condition).",
+            "success_criteria": ["flag_chouhu_knows_stakeout == true"],
+            "write_on_success": { "flag_chouhu_knows_stakeout": true },
+            "result": { "notes": "Set only if leak condition is triggered." },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D4-S05",
+        "name": "04 00 05",
+        "location": "Pawnshop",
+        "time": "Evening",
+    
+        "entry_conditions": {
+          "time_condition": "4;3",
+          "required_worldstates": [
+            { "ws_key": "flag_stakeout_plan_proposed", "must_be": true }
+          ],
+          "additional_notes": "Optional: player tells Chou Hu the stakeout plan directly (causes plan leak)."
+        },
+    
+        "environment": "Chou Hu’s smile never fully commits. You can’t tell whether he’s amused—or already ahead of you.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Chou Hu"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t04_2",
+          "summary": "Tell Chou Hu the stakeout plan (leaks the plan).",
+          "detail": "Player can choose to share the stakeout plan with Chou Hu. He appears supportive but this causes him to know the plan in advance."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D4_FLAG_CHOUHU_KNOWS_STAKEOUT_DIRECT",
+            "type": "worldstate_write",
+            "description": "Chou Hu learns about the stakeout plan (direct route).",
+            "success_criteria": ["flag_chouhu_knows_stakeout == true"],
+            "write_on_success": { "flag_chouhu_knows_stakeout": true },
+            "result": { "notes": "Plan leak marker (affects night action)." },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D4-S06",
+        "name": "04 00 06",
+        "location": "The Bureau",
+        "time": "Evening",
+    
+        "entry_conditions": {
+          "time_condition": "4;3",
+          "required_worldstates": [
+            {
+              "ws_key": "OR",
+              "must_be": true,
+              "notes": "item_recorder_forged_by_chouhu == true OR flag_stakeout_plan_proposed == true"
+            }
+          ],
+          "additional_notes": "Player reports to Haruko and/or probes attitudes; Haruko may decide to assist."
+        },
+    
+        "environment": "Haruko listens like she’s weighing outcomes, not stories. What matters is what you can force to happen next.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Haruko"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t04_3",
+          "summary": "Talk with Haruko; Haruko may agree to assist; pave way for Day 5 inquiry.",
+          "detail": "Player brings current information back to Haruko. Haruko emphasizes she is not part of the factions (no expansion), but admits Huang’s ability is dangerous. She suggests letting others see the report to test attitudes. If the player has progressed far enough, she is willing to assist."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D4_FLAG_HARUKO_WILL_ASSIST",
+            "type": "worldstate_write",
+            "description": "Haruko will assist from now on.",
+            "success_criteria": ["flag_haruko_will_assist == true"],
+            "write_on_success": { "flag_haruko_will_assist": true },
+            "result": { "notes": "Unlocks Haruko support in Day 5 multi-party inquiry." },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D4-S07",
+        "name": "04 00 07",
+        "location": "Medicine Shop (Night Stakeout)",
+        "time": "Night",
+    
+        "entry_conditions": {
+          "time_condition": "4;4",
+          "required_worldstates": [
+            { "ws_key": "flag_stakeout_plan_proposed", "must_be": true }
+          ],
+          "additional_notes": "Night stakeout is executed. Participants depend on prior choices. Outcome is not revealed immediately; only 'executed' is logged."
+        },
+    
+        "environment": "Night turns the shop into a trap that can’t decide who it’s for. Every sound feels like a footstep you haven’t earned yet.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Huang Qiye"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t05",
+          "summary": "Execute the stakeout (result withheld until Day 5 inquiry).",
+          "detail": "Player and Huang stake out as planned. Whether others join depends on prior requests for help. The direct outcome is not shown; only that the stakeout was executed is recorded for Day 5 reconstruction."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D4_FLAG_STAKEOUT_EXECUTED",
+            "type": "worldstate_write",
+            "description": "Stakeout executed (log only; results to be inferred on Day 5).",
+            "success_criteria": ["flag_stakeout_executed == true"],
+            "write_on_success": { "flag_stakeout_executed": true },
+            "result": { "log_update": ["Log: Stakeout executed. Outcome pending confirmation."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+      {
+        "scene_id": "D5-S00",
+        "name": "05 00 00",
+        "location": "Day 5 Stage Start",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "5;1",
+          "required_worldstates": [],
+          "additional_notes": "Decision day opens. Player enters Day 5 investigation phase."
+        },
+    
+        "environment": "Day five doesn’t feel like a deadline. It feels like a verdict that hasn’t been spoken yet.",
+    
+        "present_entities": {
+          "npcs": ["Player"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t06",
+          "summary": "Day 5: targeted verification and final judgment preparation.",
+          "detail": "Player already holds partial information. Today is for targeted follow-up and preparing final judgment/settlement."
+        },
+    
+        "settlement_worldstates": []
+      },
+    
+      {
+        "scene_id": "D5-S01A",
+        "name": "05 00 01A",
+        "location": "The Bureau",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "5;1",
+          "required_worldstates": [
+            { "ws_key": "flag_stakeout_executed", "must_be": true },
+            { "ws_key": "flag_chouhu_knows_stakeout", "must_be": false }
+          ],
+          "additional_notes": "Ask Haruko about the stakeout night (route A: plan not leaked to Chou Hu)."
+        },
+    
+        "environment": "Haruko’s answers are clipped—like she’s cutting away everything that can be used against her.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Haruko"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t06_1",
+          "summary": "Ask Haruko about last night (intruder route).",
+          "detail": "Haruko says she also staked out at the medicine shop, and she saw Huang injure a black-clothed person (identity unknown)."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_CLUE_BLACK_CLOTHED_PERSON_LIMP",
+            "type": "worldstate_write",
+            "description": "Clue obtained: black-clothed person was injured/limped (logged).",
+            "success_criteria": ["clue_black_clothed_person_limp == true"],
+            "write_on_success": { "clue_black_clothed_person_limp": true },
+            "result": { "log_update": ["Clue: Huang injured a black-clothed person; the person was limping (identity unknown)."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-S01B",
+        "name": "05 00 01B",
+        "location": "The Bureau",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "5;1",
+          "required_worldstates": [
+            { "ws_key": "flag_stakeout_executed", "must_be": true },
+            { "ws_key": "flag_chouhu_knows_stakeout", "must_be": true }
+          ],
+          "additional_notes": "Ask Haruko about the stakeout night (route B: plan leaked to Chou Hu)."
+        },
+    
+        "environment": "Haruko’s expression doesn’t move. The lack of detail is the detail.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Haruko"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t06_1",
+          "summary": "Ask Haruko about last night (nobody came route).",
+          "detail": "Haruko says she also staked out, but claims she saw no anomaly."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_CLUE_STAKEOUT_NOBODY_CAME",
+            "type": "worldstate_write",
+            "description": "Clue obtained: Haruko claims nobody showed up (logged).",
+            "success_criteria": ["clue_stakeout_nobody_came == true"],
+            "write_on_success": { "clue_stakeout_nobody_came": true },
+            "result": { "log_update": ["Clue: Haruko claims nobody showed up during the stakeout."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-S02A",
+        "name": "05 00 02A",
+        "location": "Medicine Shop",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "5;1",
+          "required_worldstates": [
+            { "ws_key": "flag_stakeout_executed", "must_be": true },
+            { "ws_key": "flag_chouhu_knows_stakeout", "must_be": false }
+          ],
+          "additional_notes": "Ask Huang about the stakeout night (route A: intruder appeared)."
+        },
+    
+        "environment": "Huang’s voice stays steady, but his hands don’t. Something happened. He’s deciding how much of it you deserve.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Huang Qiye"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t06_2",
+          "summary": "Ask Huang about last night (intruder route).",
+          "detail": "Huang says a black-clothed person rushed in, seemingly shocked Huang wasn’t unconscious. Huang injured the intruder’s leg."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_FACT_HUANG_SAW_INTRUDER",
+            "type": "worldstate_write",
+            "description": "Fact: Huang confirms an intruder appeared (logged).",
+            "success_criteria": ["fact_huang_saw_intruder == true"],
+            "write_on_success": { "fact_huang_saw_intruder": true },
+            "result": { "log_update": ["Fact: Huang confirms an intruder appeared during the stakeout."] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D5_CLUE_INTRUDER_LIMP_CONFIRMED",
+            "type": "worldstate_write",
+            "description": "Clue: intruder was injured and limping (logged).",
+            "success_criteria": ["clue_intruder_limp_confirmed == true"],
+            "write_on_success": { "clue_intruder_limp_confirmed": true },
+            "result": { "log_update": ["Clue: Huang injured the intruder’s leg; limping confirmed."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-S02B",
+        "name": "05 00 02B",
+        "location": "Medicine Shop",
+        "time": "Morning",
+    
+        "entry_conditions": {
+          "time_condition": "5;1",
+          "required_worldstates": [
+            { "ws_key": "flag_stakeout_executed", "must_be": true },
+            { "ws_key": "flag_chouhu_knows_stakeout", "must_be": true }
+          ],
+          "additional_notes": "Ask Huang about the stakeout night (route B: no intruder, perfume scent)."
+        },
+    
+        "environment": "The shop feels scrubbed of evidence—except for something you can’t bottle: a lingering hint of perfume.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Huang Qiye"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t06_2",
+          "summary": "Ask Huang about last night (perfume scent route).",
+          "detail": "Huang says no one broke in, but he sensed a faint perfume scent as if someone lingered nearby and left quickly. Huang is unsure if it was real. Player begins suspecting Haruko may have been involved."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_CLUE_PERFUME_SCENT",
+            "type": "worldstate_write",
+            "description": "Clue: perfume scent near the shop (logged, uncertain).",
+            "success_criteria": ["clue_perfume_scent == true"],
+            "write_on_success": { "clue_perfume_scent": true },
+            "result": { "log_update": ["Clue (uncertain): A faint perfume scent lingered nearby during the stakeout night."] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D5_FLAG_SUSPECT_HARUKO",
+            "type": "worldstate_write",
+            "description": "Suspicion flag: player suspects Haruko (optional marker).",
+            "success_criteria": ["flag_suspect_haruko == true"],
+            "write_on_success": { "flag_suspect_haruko": true },
+            "result": { "log_update": ["Flag: Player begins suspecting Haruko’s involvement."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-S06",
+        "name": "05 00 06",
+        "location": "Pawnshop",
+        "time": "Noon",
+    
+        "entry_conditions": {
+          "time_condition": "5;2",
+          "required_worldstates": [
+            { "ws_key": "item_apai_suspect_list", "must_be": true },
+            { "ws_key": "item_recorder_forged_by_chouhu", "must_be": true }
+          ],
+          "additional_notes": "Player probes Chou Hu; Chou Hu demands to see A-Pai suspect list. Player may give or refuse."
+        },
+    
+        "environment": "Chou Hu’s price is never money. It’s always leverage.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Chou Hu"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t06_3",
+          "summary": "Probe Chou Hu: show A-Pai list or refuse.",
+          "detail": "Chou Hu won’t talk for free. He wants to see the A-Pai suspect list. If player shows it, Chou Hu claims: 'Your local Bureau is almost all A-Pai—except the Logistics Manager.' Truth unclear. If player refuses, Chou Hu refuses to elaborate."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_FLAG_CHOUHU_CLAIMS_BUREAU_APAI",
+            "type": "worldstate_write",
+            "description": "Chou Hu’s claim logged (only if player shows the list and triggers the dialogue).",
+            "success_criteria": ["flag_chouhu_claims_bureau_apai == true"],
+            "write_on_success": { "flag_chouhu_claims_bureau_apai": true },
+            "result": { "log_update": ["Chou Hu’s claim: 'The Bureau is almost all A-Pai, except the Logistics Manager.' (unverified)"] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D5_FLAG_CHOUHU_REFUSED",
+            "type": "worldstate_write",
+            "description": "Player refused to show the list; Chou Hu refused to talk further.",
+            "success_criteria": ["flag_chouhu_refused == true"],
+            "write_on_success": { "flag_chouhu_refused": true },
+            "result": { "log_update": ["Chou Hu refused to elaborate after player withheld the A-Pai list."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-S03",
+        "name": "05 00 03",
+        "location": "Main Street",
+        "time": "Afternoon",
+    
+        "entry_conditions": {
+          "time_condition": "5;2",
+          "required_worldstates": [
+            { "ws_key": "item_apai_suspect_list", "must_be": true },
+            { "ws_key": "flag_chouhu_knows_stakeout", "must_be": false }
+          ],
+          "additional_notes": "Player spots Logistics Manager with an abnormal limp (route A)."
+        },
+    
+        "environment": "Crowds hide patterns—until you see one person trying too hard to walk normally.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Logistics Manager"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t07_0",
+          "summary": "Track the abnormal person (limp seen).",
+          "detail": "Player searches for anomalies and runs into the Logistics Manager—limping. The manager tries to evade explanation."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_FACT_LOGISTICS_MANAGER_LIMP_SEEN",
+            "type": "worldstate_write",
+            "description": "Fact: Logistics Manager seen limping (logged).",
+            "success_criteria": ["fact_logistics_manager_limp_seen == true"],
+            "write_on_success": { "fact_logistics_manager_limp_seen": true },
+            "result": { "log_update": ["Fact: Logistics Manager seen with an abnormal limp on Main Street."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-S04",
+        "name": "05 00 04",
+        "location": "Main Street",
+        "time": "Afternoon",
+    
+        "entry_conditions": {
+          "time_condition": "5;2",
+          "required_worldstates": [
+            { "ws_key": "item_apai_suspect_list", "must_be": true },
+            { "ws_key": "flag_chouhu_knows_stakeout", "must_be": true }
+          ],
+          "additional_notes": "Player probes the Logistics Manager and intensifies suspicion (route B)."
+        },
+    
+        "environment": "You ask a simple question. The answer dodges. That tells you everything—and nothing.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Logistics Manager"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t07_0",
+          "summary": "Probe Logistics Manager; suspicion escalates.",
+          "detail": "Player tests the manager with 'Were you going to see Chou Hu?' The manager plays dumb and avoids the point. Player’s suspicion toward both Chou Hu and the manager strengthens."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_FLAG_SUSPECT_CHOUHU",
+            "type": "worldstate_write",
+            "description": "Suspicion flag: player suspects Chou Hu.",
+            "success_criteria": ["flag_suspect_chouhu == true"],
+            "write_on_success": { "flag_suspect_chouhu": true },
+            "result": { "log_update": ["Flag: Player suspects Chou Hu is tied to the revival chain."] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D5_FLAG_SUSPECT_LOGISTICS_MANAGER",
+            "type": "worldstate_write",
+            "description": "Suspicion flag: player suspects the Logistics Manager.",
+            "success_criteria": ["flag_suspect_logistics_manager == true"],
+            "write_on_success": { "flag_suspect_logistics_manager": true },
+            "result": { "log_update": ["Flag: Player suspects the Logistics Manager is involved."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-S05",
+        "name": "05 00 05",
+        "location": "Milestone Gate",
+        "time": "Afternoon",
+    
+        "entry_conditions": {
+          "time_condition": "5;2",
+          "required_worldstates": [
+            {
+              "ws_key": "COMPLEX",
+              "must_be": true,
+              "notes": "(fact_logistics_manager_limp_seen == true OR flag_suspect_logistics_manager == true) AND clue_intruder_limp_confirmed == true"
+            }
+          ],
+          "additional_notes": "Milestone: connect limp clue with Logistics Manager anomaly; major suspect established."
+        },
+    
+        "environment": "",
+    
+        "present_entities": {
+          "npcs": [],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t07_1",
+          "summary": "Milestone: Logistics Manager becomes major suspect.",
+          "detail": "Player connects 'intruder limping' with 'Logistics Manager limping / abnormal behavior' and forms a stronger judgment: Logistics Manager likely involved in the stakeout-night action."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_FACT_LOGISTICS_MANAGER_MAJOR_SUSPECT",
+            "type": "worldstate_write",
+            "description": "Milestone fact: Logistics Manager is established as a major suspect.",
+            "success_criteria": ["fact_logistics_manager_major_suspect == true"],
+            "write_on_success": { "fact_logistics_manager_major_suspect": true },
+            "result": { "log_update": ["Milestone: Logistics Manager becomes a major suspect (limp clue linked)."] },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-S07",
+        "name": "05 00 07",
+        "location": "Near Pawnshop (Eavesdrop)",
+        "time": "Evening",
+    
+        "entry_conditions": {
+          "time_condition": "5;3",
+          "required_worldstates": [
+            { "ws_key": "fact_logistics_manager_major_suspect", "must_be": true }
+          ],
+          "additional_notes": "Player follows and eavesdrops; collusion evidence emerges."
+        },
+    
+        "environment": "You don’t hear the whole conversation—just enough to know it’s real.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Logistics Manager", "Chou Hu"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t07_2",
+          "summary": "Follow/eavesdrop: collusion evidence.",
+          "detail": "Player tails the Logistics Manager to the pawnshop and overhears fragments of conversation with Chou Hu, forming harder collusion evidence."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_FACT_CHOUHU_LOGISTICS_COLLUSION",
+            "type": "worldstate_write",
+            "description": "Fact: collusion between Chou Hu and Logistics Manager confirmed (logged).",
+            "success_criteria": ["fact_chouhu_logistics_collusion == true"],
+            "write_on_success": { "fact_chouhu_logistics_collusion": true },
+            "result": { "log_update": ["Fact: Overheard evidence suggests Chou Hu and Logistics Manager are colluding."] },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D5_FLAG_SUSPECT_CHOUHU_REINFORCED",
+            "type": "worldstate_write",
+            "description": "Suspicion flag: Chou Hu suspected (reinforced).",
+            "success_criteria": ["flag_suspect_chouhu == true"],
+            "write_on_success": { "flag_suspect_chouhu": true },
+            "result": { "notes": "May already be true; this scene can also set it." },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-GC01",
+        "name": "05 GC 01",
+        "location": "The Bureau",
+        "time": "Evening",
+    
+        "entry_conditions": {
+          "time_condition": "5;3",
+          "required_worldstates": [
+            { "ws_key": "fact_bureau_npcs_unlocked", "must_be": true }
+          ],
+          "additional_notes": "Final group discussion. Huang may participate."
+        },
+    
+        "environment": "Everyone reacts to the same facts differently. The room becomes a lie detector nobody asked for.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Director", "Logistics Manager", "Field Ops Manager", "Haruko", "Bill", "Wasabi", "Huang Qiye"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "gc_day5",
+          "summary": "Final group chat to surface reactions and integrate information.",
+          "detail": "Player organizes a last discussion and throws current clues into the room to observe reactions. Mainly for narrative and AI performance; no hard evidence guaranteed."
+        },
+    
+        "settlement_worldstates": []
+      },
+    
+      {
+        "scene_id": "D5-S08",
+        "name": "05 00 08",
+        "location": "Settlement Prep",
+        "time": "Night",
+    
+        "entry_conditions": {
+          "time_condition": "5;4",
+          "required_worldstates": [],
+          "additional_notes": "Settlement day: system generates 'reportable points' list based on obtained facts/flags."
+        },
+    
+        "environment": "",
+    
+        "present_entities": {
+          "npcs": [],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t08",
+          "summary": "Generate reportable settlement points (availability flags).",
+          "detail": "System checks key facts/flags and generates corresponding report_*_available entries: suspect Haruko, major suspect Logistics, risk Chou Hu, risk Huang, Chou Hu’s claim about Bureau A-Pai."
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_REPORT_SUSPECT_HARUKO_AVAILABLE",
+            "type": "worldstate_write",
+            "description": "Report option available: suspect Haruko.",
+            "success_criteria": ["flag_suspect_haruko == true"],
+            "write_on_success": { "report_suspect_haruko_available": true },
+            "result": { "notes": "Generated if player suspected Haruko." },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D5_REPORT_SUSPECT_LOGISTICS_AVAILABLE",
+            "type": "worldstate_write",
+            "description": "Report option available: suspect Logistics Manager (major suspect).",
+            "success_criteria": ["fact_logistics_manager_major_suspect == true"],
+            "write_on_success": { "report_suspect_logistics_available": true },
+            "result": { "notes": "Generated if major suspect milestone achieved." },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D5_REPORT_RISK_CHOUHU_AVAILABLE",
+            "type": "worldstate_write",
+            "description": "Report option available: risk Chou Hu (suspicion/collusion).",
+            "success_criteria": [
+              {
+                "ws_key": "OR",
+                "must_be": true,
+                "notes": "flag_suspect_chouhu == true OR fact_chouhu_logistics_collusion == true"
+              }
+            ],
+            "write_on_success": { "report_risk_chouhu_available": true },
+            "result": { "notes": "Generated if player suspects Chou Hu OR has collusion fact." },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D5_REPORT_RISK_HUANG_AVAILABLE",
+            "type": "worldstate_write",
+            "description": "Report option available: risk Huang (revival ability confirmed).",
+            "success_criteria": ["fact_huang_revive_secret_known == true"],
+            "write_on_success": { "report_risk_huang_available": true },
+            "result": { "notes": "Generated if player confirmed Huang’s revival ability." },
+            "deadline_turn": 10
+          },
+          {
+            "ws_id": "WS_D5_REPORT_CLAIM_BUREAU_APAI_AVAILABLE",
+            "type": "worldstate_write",
+            "description": "Report option available: Chou Hu’s claim 'Bureau is almost all A-Pai'.",
+            "success_criteria": ["flag_chouhu_claims_bureau_apai == true"],
+            "write_on_success": { "report_claim_bureau_apai_available": true },
+            "result": { "notes": "Generated if player triggered Chou Hu’s claim." },
+            "deadline_turn": 10
+          }
+        ]
+      },
+    
+      {
+        "scene_id": "D5-S09",
+        "name": "05 00 09",
+        "location": "The Bureau (Submit)",
+        "time": "Night",
+    
+        "entry_conditions": {
+          "time_condition": "5;4",
+          "required_worldstates": [
+            {
+              "ws_key": "ANY_REPORT_AVAILABLE",
+              "must_be": true,
+              "notes": "At least one of: report_suspect_haruko_available / report_suspect_logistics_available / report_risk_chouhu_available / report_risk_huang_available / report_claim_bureau_apai_available is true."
+            }
+          ],
+          "additional_notes": "Final submission: player chooses which report points to submit; different combinations trigger endings."
+        },
+    
+        "environment": "You don’t submit a report. You submit a story that the Bureau can act on.",
+    
+        "present_entities": {
+          "npcs": ["Player", "Haruko"],
+          "items": [],
+          "interactive_environment_objects": []
+        },
+    
+        "task_context": {
+          "task_id": "t08_submit",
+          "summary": "Final submit / report selection -> ending trigger.",
+          "detail": "Player selects which available points to report upward. Different combinations yield different ending texts. Truth is revealed consistently in the ending: medicine-shop ingredients can be mixed into sedative/dissociative agent, causing Huang to enter dissociative sleepwalking, triggering rescue obsession; later blackout/amnesia with headache. The chain persists for profit; Chou Hu may broker leverage. Ambiguity remains: is Haruko fully clean, and what is her deeper motive?"
+        },
+    
+        "settlement_worldstates": [
+          {
+            "ws_id": "WS_D5_ENDING_TRIGGERED",
+            "type": "worldstate_write",
+            "description": "Ending triggered and recorded (ending_key set by system based on chosen report combination).",
+            "success_criteria": ["ending_triggered == true"],
+            "write_on_success": { "ending_triggered": true },
+            "result": { "notes": "System should also set ending_key (A/B/C/D/F) based on player submission." },
+            "deadline_turn": 10
+          }
+        ]
+      }
+  
+
+  ]

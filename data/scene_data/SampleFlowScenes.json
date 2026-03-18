@@ -1,0 +1,243 @@
+[
+  {
+    "name": "Beginning",
+    "location": "0",
+    "trigger_conditions": {
+      "time_condition": "1;1"
+    },
+    "environment": "Dim, amber light seeps from a single hanging bulb, casting long shadows across cracked wooden shelves lined with dusty jars and faded labels. The air smells of dried herbs and old wood. The room holds the quiet weight of time—like it hasn't changed since the late 1970s. Outside, daylight filters through slatted windows, pale and distant. The player lies on a hard wooden bed, a worn bamboo mat scratching at their back. Beside them, an elderly man—Huang Qiye—sits with quiet vigilance, his brows furrowed in concern as he watches the player stir.",
+    "interactive_environment_objects": null,
+    "interactive_npc": [
+      {
+        "name": "Huang Qiye",
+        "additional_conditions": null,
+        "goal": "Ask how player feel now and what's the goal of player.",
+        "emotion_pool": [
+          {
+            "id": "0",
+            "trigger_condition": null,
+            "goal": "Be concerned about the physical condition of the player, provide advice, and answer the player's questions."
+          },
+          {
+            "id": "1",
+            "trigger_condition": "The player constantly goes off-topic or shows a negative attitude.",
+            "goal": "Gradually stop talking to the player and let the player leave."
+          }
+        ]
+      }
+    ],
+    "key_questions": [
+      {
+        "id": "0",
+        "content": "What's the reaction of player after weaking up?"
+      },
+      {
+        "id": "1",
+        "content": "How credible is the player's words according to known information (Qiye Huang saved the player from the death)?"
+      },
+      {
+        "id": "2",
+        "content": "What's the attitude of player after weaking up?"
+      }
+    ],
+    "scene_end_state_reference": {
+      "end_condition1": "The player has no more question and want to leave",
+      "end_condition2": "The player frequently goes off topic or shows bad attitude"
+    }
+  },
+  {
+    "name": "Connection1",
+    "location": "1",
+    "trigger_conditions": {
+      "time_condition": "2;10"
+    },
+    "environment": "Mist Hidden Street is a narrow, stone-paved lane shrouded in thin mist. Faded lanterns sway above weathered rooftops, while vines crawl along crumbling walls. The air smells of herbs, damp wood, and faint incense. Dim lights flicker from shadowed shopfronts, their signs old and peeling. Water pools in cracks beneath tangled power lines. It's quiet—only the soft creak of wood and a distant chime break the stillness.",
+    "interactive_environment_objects": null,
+    "interactive_npc": [
+      {
+        "name": "Chou Hu",
+        "additional_conditions": null,
+        "goal": "Get to know the player and make the player start to suspect Qiye Huang.",
+        "emotion_pool": [
+          {
+            "id": "0",
+            "trigger_condition": null,
+            "goal": "Use some ambiguous words to make the player doubt Qiye Huang."
+          },
+          {
+            "id": "1",
+            "trigger_condition": "The player constantly goes off-topic.",
+            "goal": "Become impatient and leave."
+          },
+          {
+            "id": "2",
+            "trigger_condition": "The player insistently trust Qiye Huang and protect him in words.",
+            "goal": "Find the player to be boring and disappointing, and leave the player with bad words."
+          }
+        ]
+      }
+    ],
+    "key_questions": [
+      {
+        "id": "0",
+        "content": "How much trust do the players have in Qiye Huang?"
+      },
+      {
+        "id": "1",
+        "content": "After hearing Chou Hu's words, how suspicious the player is towards the herbal medicine shop?"
+      },
+      {
+        "id": "2",
+        "content": "What's the player's attitude to Chou Hu and Chou Hu's words?"
+      }
+    ],
+    "scene_end_state_reference": {
+      "end_condition1": "The player trusts the word of Chou Hu and shows a positive attitude towards Chou Hu.",
+      "end_condition2": "The player frequently goes off topic.",
+      "end_condition3": "The player so trusts Qiye Huang that makes Chou Hu leave."
+    }
+  },
+  {
+    "name": "Night Steal",
+    "location": "0",
+    "trigger_conditions": {
+      "time_condition": "3;10"
+    },
+    "environment": "Midnight cloaks the room in heavy stillness, broken only by the soft ticking of a wall clock. Pale moonlight slips through the window slats, brushing over an old wooden desk near the bed. The surface is scattered with yellowed notes, a dry brush, and a dim oil lamp casting a faint, flickering glow. One drawer, just within reach from the bed, hangs slightly open—its dark gap inviting yet unreadable. The scent of aged herbs and ink hangs thick in the cool, unmoving air.",
+    "interactive_environment_objects": null,
+    "interactive_npc": [
+      {
+        "name": "Chou Hu",
+        "additional_conditions": null,
+        "goal": "Entice the player to steal the stuff inside the drawer.",
+        "emotion_pool": [
+          {
+            "id": "0",
+            "trigger_condition": null,
+            "goal": "Orally invite the player to steal the stuff inside the drawer."
+          },
+          {
+            "id": "1",
+            "trigger_condition": "The player constantly goes off-topic or refuse to steal.",
+            "goal": "Become impatient and taunt the player."
+          }
+        ]
+      }
+    ],
+    "key_questions": [
+      {
+        "id": "0",
+        "content": "Does the player agree to Chou Hu's proposal to peep the drawer of Qiye Huang?"
+      },
+      {
+        "id": "1",
+        "content": "What's the player's attitude after hearing Chou Hu's proposal?"
+      },
+      {
+        "id": "2",
+        "content": "How much trust does the player have in Qiye Huang now?"
+      }
+    ],
+    "scene_end_state_reference": {
+      "end_condition1": "The player peeps the drawer and reads the medical history",
+      "end_condition2": "The player frequently goes off topic or refuse to peep."
+    }
+  },
+  {
+    "name": "Connection2",
+    "location": "2",
+    "trigger_conditions": {
+      "time_condition": "4;10"
+    },
+    "environment": "Street-level teahouse hums with quiet life. Worn wooden tables crowd the space, stained by years of spilled tea and stories. Paper lanterns sway gently overhead, casting warm, dappled light. The air is thick with the scent of roasted tea leaves and damp stone. In one corner, a low platform holds a single stool and table—set for the storyteller.",
+    "interactive_environment_objects": null,
+    "interactive_npc": [
+      {
+        "name": "Hua Pi",
+        "additional_conditions": null,
+        "goal": "Get to know the player and make the player start to suspect Qiye Huang.",
+        "emotion_pool": [
+          {
+            "id": "0",
+            "trigger_condition": null,
+            "goal": "Use some ambiguous words to make the player doubt Qiye Huang."
+          },
+          {
+            "id": "1",
+            "trigger_condition": "The player constantly goes off-topic or insistently trust Qiye Huang.",
+            "goal": "Become impatient, taunt the player, and leave."
+          }
+        ]
+      }
+    ],
+    "key_questions": [
+      {
+        "id": "0",
+        "content": "How much trust do the players have in Qiye Huang?"
+      },
+      {
+        "id": "1",
+        "content": "Does the player trust Hua Pi's words?"
+      },
+      {
+        "id": "2",
+        "content": "What's the player's attitude after hearing Hua Pi's words?"
+      }
+    ],
+    "scene_end_state_reference": {
+      "end_condition1": "The player trusts the word of Hua Pi and shows a positive attitude towards Hua Pi.",
+      "end_condition2": "The player frequently goes off topic or refuse to trust Hua Pi."
+    }
+  },
+  {
+    "name": "Connection3",
+    "location": "3",
+    "trigger_conditions": {
+      "time_condition": "5;10"
+    },
+    "environment": "The back courtyard is still and shadowed, enclosed by crumbling brick walls cloaked in ivy. A faint herbal scent lingers in the damp night air. In the center, an old wooden cot lies beneath a tattered canopy, the figure atop barely breathing. Nearby, a low table holds rows of fine silver needles, some faintly glowing under the moonlight—one missing.",
+    "interactive_environment_objects": null,
+    "interactive_npc": [
+      {
+        "name": "Hua Pi",
+        "additional_conditions": null,
+        "goal": "Make the player suspect Qiye Huang and help the player think from another side.",
+        "emotion_pool": [
+          {
+            "id": "0",
+            "trigger_condition": null,
+            "goal": "Guide the player to consider the things Qiye did from a negative side."
+          },
+          {
+            "id": "1",
+            "trigger_condition": "The player constantly goes off-topic or insistently trust Qiye Huang.",
+            "goal": "Become impatient, taunt the player, and leave."
+          },
+          {
+            "id": "2",
+            "trigger_condition": "The player trusts Huapi and start to suspect the behavior of Qiye.",
+            "goal": "Guide the player to suspect the player's lot."
+          }
+        ]
+      }
+    ],
+    "key_questions": [
+      {
+        "id": "0",
+        "content": "Is the player willing to know more about the truth by asking Hua Pi?"
+      },
+      {
+        "id": "1",
+        "content": "How much trust do the players have in Qiye Huang now?"
+      },
+      {
+        "id": "2",
+        "content": "What's the player's attitude towards the temptation of Hua Pi?"
+      }
+    ],
+    "scene_end_state_reference": {
+      "end_condition1": "The player trusts the word of Hua Pi and shows a positive attitude towards Hua Pi.",
+      "end_condition2": "The player frequently goes off topic or refuse to trust Hua Pi."
+    }
+  }
+]
